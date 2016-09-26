@@ -1,13 +1,13 @@
 
-class Deck {
-    constructor() {
-        //create deck
-        this.deck = this.createDeck();
-        this.deck = this.shuffleDeck();
-    }
+function Deck() {
+    this.deck = this.createDeck();
+    this.deck = this.shuffleDeck();
+    console.log(this.deck);
+}
 
-    createDeck() {
-        var deck = [
+
+Deck.prototype.createDeck = function() {
+    var deck = [
             { suit: "spade", value: 2 },
             { suit: "spade", value: 3 },
             { suit: "spade", value: 4 },
@@ -60,29 +60,24 @@ class Deck {
             { suit: "diamond", value: 12 },
             { suit: "diamond", value: 13 },
             { suit: "diamond", value: 14 }
-        ];
+    ];
             
-        return deck;
-    }
-
-    shuffleDeck() {
-        var shuffledDeck = [];
-
-        for(var i = this.deck.length; i > 0; i--) {
-            var num = Math.floor(Math.random() * i);
-
-            shuffledDeck.push(this.deck[num]);
-            this.deck.splice(num, 1);
-        }
-
-        return shuffledDeck;
-    }
-
-    popFromDeck() {
-        var card = this.deck[this.deck.length - 1];
-        this.deck.pop();
-        return card;
-    }
+    return deck;
 }
+
+Deck.prototype.shuffleDeck = function() {
+    var shuffledDeck = [];
+
+    for(var i = this.deck.length; i > 0; i--) {
+        var num = Math.floor(Math.random() * i);
+
+        shuffledDeck.push(this.deck[num]);
+            this.deck.splice(num, 1);
+    }
+
+    return shuffledDeck;
+}
+
+var mydeck = new Deck();
 
 module.exports = Deck;

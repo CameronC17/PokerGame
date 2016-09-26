@@ -1,29 +1,26 @@
+var Deck = require('./deck');
 
-class Game {
-    constructor(deck) {
-        this.deck = deck;
+function Game() {
+    this.deck = new Deck();
+    this.players = [];
+    this.dealInitial();
+}
 
-        // Array of player's hands
-        this.players = [ {
-            player: {
-                hand: [],
-                stake: 0
-            }
-        },[],[],[],[] ];
+// Game.initialize = function() {
+//     this.deck = new Deck();
+//     this.players = [];
+//     this.dealInitial();
+// }
 
-        this.dealInitial();
+Game.prototype.dealInitial = function() {
+    for(var i = 0; i < this.players.length; i++) {
+        this.players[i].push(this.deck.popFromDeck());
+        this.players[i].push(this.deck.popFromDeck());
     }
+}
 
-    dealInitial() {
-        for(var i = 0; i < this.players.length; i++) {
-            this.players[i].push(this.deck.popFromDeck());
-            this.players[i].push(this.deck.popFromDeck());
-        }
-    }
-
-    getPlayers() {
-        return this.players;
-    }
+Game.prototype.getPlayers = function() {
+    return this.players;
 }
 
 module.exports = Game;
