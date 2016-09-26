@@ -16,7 +16,7 @@ function createSession(req, res) {
             // Sets the session user id to equal the logged in user id.
             req.session.user = user.id;
             console.log("user logged in "+ req.body.username );
-            res.redirect('/');
+            res.sendStatus(200);
         } else {
             if (err) {
                 console.log(err.message);
@@ -24,7 +24,7 @@ function createSession(req, res) {
                 console.log("There's no user with those credentials!");
             }
 
-            res.redirect('/sessions/new');
+            res.sendStatus(400);
         }
     });
 }
@@ -34,7 +34,7 @@ function createSession(req, res) {
 function deleteSession(req, res) {
     delete req.session.user;
 
-    res.redirect('/sessions/new');
+    res.sendStatus(200);
 }
 
 module.exports = {

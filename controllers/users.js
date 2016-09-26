@@ -5,7 +5,7 @@ function createUser(req, res){
   User.create(req.body, function(err, user){
     if (err) console.log(err.message);
     console.log(req.body);
-    res.status(200).redirect('/api');
+    res.sendStatus(200)
   });
 };
 
