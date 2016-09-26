@@ -1,5 +1,5 @@
 var express = require('express');
-var session = require('epress-session');
+var session = require('express-session');
 var mongoose = require('mongoose');
 
 
@@ -14,7 +14,7 @@ var User = require('./models/user');
 
 app.use(session({
   resave:false,
-  saveUninistialized: true,
+  saveUninitialized: true,
   secret: 'qwerty'
 }));
 
