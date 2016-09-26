@@ -2,7 +2,6 @@
 function Deck() {
     this.deck = this.createDeck();
     this.deck = this.shuffleDeck();
-    console.log(this.deck);
 }
 
 

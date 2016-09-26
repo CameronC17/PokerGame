@@ -22,11 +22,21 @@ describe('Game', function() {
     });
 
     it('should place a bet', function(done) {
-
         var game = new Game(new Deck());
 
-        
-
+        done();
     });
+
+    it('should deal the flop', function(done) {
+        var game = new Game(new Deck());
+
+        game.dealTableCards(3);
+
+        var table = game.getTableCards();
+        console.log(table);
+
+        expect(table).to.have.length(3);
+        done();
+    })
 })
 

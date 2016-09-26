@@ -12,8 +12,10 @@ router.route('/users/login')
 router.route('/sessions/new')
       .get(sessionController.new);
 
+// User routes
 router.route('/users')
-      .post(usersController.create);
+      .post(usersController.create)
+      .patch(usersController.update);
 
 
 // Game routes
