@@ -4,7 +4,7 @@ mongoose.connect("mongodb://localhost/poker");
 //mongoose.connect('mongodb://192.10.10.200:27017/poker');
 
 
-var UserSchema = new mongoose.Schema({
+var UsersSchema = new mongoose.Schema({
   username: {type : String, required: true, unique: true},
   password : {type: String, required: true},
   wallet : { type: Number, required: true}
