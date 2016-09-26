@@ -78,6 +78,10 @@ class Deck {
 
         return shuffledDeck;
     }
+
+    popFromDeck() {
+        return deck.pop();
+    }
 }
 
 var mydeck = new Deck();
