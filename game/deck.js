@@ -78,6 +78,10 @@ Deck.prototype.shuffleDeck = function() {
     return shuffledDeck;
 }
 
-var mydeck = new Deck();
+Deck.prototype.popFromDeck = function() {
+    var card = this.deck[this.deck.length - 1];
+    this.deck.pop();
+    return card;
+}
 
 module.exports = Deck;

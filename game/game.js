@@ -2,7 +2,7 @@ var Deck = require('./deck');
 
 function Game() {
     this.deck = new Deck();
-    this.players = [];
+    this.players = [[],[],[],[],[]];
     this.dealInitial();
 }
 
