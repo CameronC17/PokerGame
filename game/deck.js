@@ -4,7 +4,6 @@ class Deck {
         //create deck
         this.deck = this.createDeck();
         this.deck = this.shuffleDeck();
-        console.log(this.deck);
     }
 
     createDeck() {
@@ -80,10 +79,10 @@ class Deck {
     }
 
     popFromDeck() {
-        return deck.pop();
+        var card = this.deck[this.deck.length - 1];
+        this.deck.pop();
+        return card;
     }
 }
-
-var mydeck = new Deck();
 
 module.exports = Deck;

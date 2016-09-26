@@ -14,8 +14,10 @@ class Game {
             this.players[i].push(this.deck.popFromDeck());
             this.players[i].push(this.deck.popFromDeck());
         }
+    }
 
-        console.log(this.players);
+    getPlayers() {
+        return this.players;
     }
 }
 
