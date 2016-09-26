@@ -4,7 +4,12 @@ class Game {
         this.deck = deck;
 
         // Array of player's hands
-        this.players = [ [],[],[],[],[] ];
+        this.players = [ {
+            player: {
+                hand: [],
+                stake: 0
+            }
+        },[],[],[],[] ];
 
         this.dealInitial();
     }
