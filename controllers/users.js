@@ -9,10 +9,6 @@ function createUser(req, res){
   });
 };
 
-function loginUser(req, res){
-  
-}
-
 module.exports = {
   create: createUser
 };
