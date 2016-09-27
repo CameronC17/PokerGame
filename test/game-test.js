@@ -19,6 +19,24 @@ describe('Game', function() {
         expect(players[3]).to.have.length(2);
         expect(players[4]).to.have.length(2);
         done();
+    });
+
+    it('should place a bet', function(done) {
+        var game = new Game(new Deck());
+
+        done();
+    });
+
+    it('should deal the flop', function(done) {
+        var game = new Game(new Deck());
+
+        game.dealTableCards(3);
+
+        var table = game.getTableCards();
+        console.log(table);
+
+        expect(table).to.have.length(3);
+        done();
     })
 })
 
