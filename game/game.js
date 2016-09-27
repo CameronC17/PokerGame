@@ -41,6 +41,15 @@ Game.prototype.startGame = function(){
   //payout
 }
 
+Game.prototype.checkPlayerOnTable = function(playerID){
+  for (var i = 0; i < players.length; i++) {
+    if (players[i].getID == playerID) {
+      return true;
+    }
+  }
+  return false;
+}
+
 Game.prototype.dealPlayerCards = function() {
     for(var i = 0; i < this.players.length; i++) {
         this.players[i].addCard(this.deck.popFromDeck());
@@ -73,7 +82,7 @@ Game.prototype.getPlayers = function() {
 Game.prototype.checkWinners = function() {
   for (var i = 0; i < players.length; i++) {
     //players[i].handValue = this.checkHand(players[i]);
-    players[i].setHandValue(this.checkHand(players[i]);
+    //players[i].setHandValue(this.checkHand(players[i]);
   }
 }
 
@@ -81,21 +90,7 @@ Game.prototype.checkHand = function(player) {
   var playerHand = player.getHand();
   playerHand = playerHand.concat(this.tableCards);
 
-  this.checkRoyalFlush(){
-    var indexes = [];
-    for (var val = 10; val < 15; val++){
-      var index = this.arrayObjectIndexOf(playerHand,  val, 'value');
-      if (index !== -1){
-        indexes = indexes.concat(index);
-      }
 
-    }
-
-  };
-  //this.checkStraightFlush();
-  //
-
-  //return handValue
 }
 
 Game.prototype.arrayObjectIndexOf = function(myArray, searchTerm, property) {
@@ -112,14 +107,14 @@ Game.prototype.arrayObjectIndexOf = function(myArray, searchTerm, property) {
 
 }
 
-Game.prototype.checkSuit = functions(indexes, playerHand){
+Game.prototype.checkSuit = function(indexes, playerHand) {
   var heart = [];
   var diamond = [];
   var spade = [];
   var club = [];
 
   for ( var i = 0; i < indexes.length; i++){
-    
+
   }
 }
 
