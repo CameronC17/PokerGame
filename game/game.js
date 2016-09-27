@@ -73,8 +73,8 @@ Game.prototype.payout = function(winners) {
 Game.prototype.getPlayerCards = function() {
 	var playerCards = [];
 
-	for(var i = 0; i < players.length; players++) {
-		playerCards = playerCards.concat(players[i].getHand());
+	for(var i = 0; i < this.players.length; i++) {
+		playerCards.push(this.players[i].getHand());
 	}
 	
 	return playerCards;

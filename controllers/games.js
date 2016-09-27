@@ -14,7 +14,7 @@ function controlGame(req, res) {
   res.send(200);
 }
 
-function createGame() {
+function createGame(req, res) {
   var players = [];
 
   for (var i = 0; i < 5; i++){
@@ -25,8 +25,9 @@ function createGame() {
   var game = tables[tables.length - 1];
 
   game.startGame();
-
-  res.send(200).json(game.getPlayerCards());
+  var playerCards = game.getPlayerCards();
+  console.log(playerCards);
+  res.json(playerCards);
 }
 
 module.exports = {
