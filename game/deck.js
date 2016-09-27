@@ -71,8 +71,9 @@ Deck.prototype.shuffleDeck = function() {
         var num = Math.floor(Math.random() * i);
 
         shuffledDeck.push(this.deck[num]);
-            this.deck.splice(num, 1);
+        this.deck.splice(num, 1);
     }
+    console.log(shuffledDeck);
 
     return shuffledDeck;
 }

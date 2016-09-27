@@ -16,7 +16,7 @@ Game.prototype.dealInitial = function() {
 
 Game.prototype.dealTableCards = function(num) {
     for(var i = 0; i < num; i++) {
-        if (tableCards.length > 5) {
+        if (this.tableCards.length < 5) {
             this.tableCards.push(this.deck.popFromDeck());
         }
     }

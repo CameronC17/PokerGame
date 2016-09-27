@@ -37,6 +37,6 @@ describe('Game', function() {
 
         expect(table).to.have.length(3);
         done();
-    })
+    });
 })
 

@@ -4,7 +4,8 @@ var tables = [];
 
 
 function createGame() {
-    tables.push(new Game(new Deck()));
+    //make players
+    tables.push(new Game(new Deck(), players));
 }
 
 module.exports = {
