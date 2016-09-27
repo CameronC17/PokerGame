@@ -15,14 +15,15 @@ router.route('/sessions/new')
 // User routes
 router.route('/users')
       .post(usersController.create);
-      
 
 router.route('/users/:id')
       .patch(usersController.update);
 
-
 // Game routes
+router.route('/games/')
+      .post(gamesController.control);
+
 router.route('/games/new')
-      .get(gamesController.create);
+      .post(gamesController.create);
 
 module.exports = router;

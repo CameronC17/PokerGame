@@ -1,15 +1,25 @@
 var Game = require('../game/game.js');
-var Deck = require('../game/deck.js');
 var Player = require('../game/player.js');
 var tables = [];
 
-function createGame(req, res) {
+function joinGame(req, res) {
+
+}
+
+function controlGame(req, res) {
+  //checks what user we are playing as
+  if(req.session.user != undefined) {
+
+  }
+  res.send(200);
+}
+
+function createGame() {
   var players = [];
 
   for (var i = 0; i < 5; i++){
     players.push(new Player());
   }
-
   tables.push(new Game(players));
 
   var game = tables[tables.length - 1];
@@ -20,5 +30,6 @@ function createGame(req, res) {
 }
 
 module.exports = {
-    create: createGame
+    create: createGame,
+    control: controlGame
 }
