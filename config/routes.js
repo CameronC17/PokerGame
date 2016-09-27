@@ -14,7 +14,10 @@ router.route('/sessions/new')
 
 // User routes
 router.route('/users')
-      .post(usersController.create)
+      .post(usersController.create);
+      
+
+router.route('/users/:id')
       .patch(usersController.update);
 
 
