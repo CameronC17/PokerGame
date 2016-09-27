@@ -76,6 +76,14 @@ describe('Deck', function() {
 
         var passed = true;
 
+        // check original deck position 1 DOES NOT equal shuffle deck position 1
+        // AND
+        // check original deck position 2 DOES NOT equal shuffle deck position 2
+        // AND
+        // check original deck position 52 DOES NOT equal shuffle deck position 52
+        // this may still fail though the chance of this happening is:
+        // 1 in 80,658,175,170,943,878,571,660,636,856,403,766,975,289,505,440,883,277,824,000,000,000,000
+
         for (var i = 0; i < 52; i++) {
             if (deck.deck[i].suit == shuffleDeck.deck[i].suit)
                 passed = !passed;
