@@ -8,7 +8,7 @@ function createGame() {
   for (var i = 0; i < 5; i++){
     players.push(new Player());
   }
-    tables.push(new Game(new Deck(), players));
+    tables.push(new Game(players));
 }
 
 module.exports = {

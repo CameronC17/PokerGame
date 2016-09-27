@@ -12,4 +12,12 @@ Player.prototype.addCard = function(card){
   this.hand.push(card);
 }
 
+Player.prototype.getHand = function(){
+  return this.hand;
+}
+
+Player.prototype.setHandValue = function(handValue){
+  this.handValue = handValue;
+}
+
 module.exports = Player;
