@@ -6,8 +6,6 @@ function Player(username, wallet, hand, handValue){
   this.handValue = [null, null, null, null, null, null, null, null, null, null];
 }
 
-
-
 Player.prototype.addCard = function(card){
   this.hand.push(card);
 }

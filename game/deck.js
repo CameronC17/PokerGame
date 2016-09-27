@@ -73,7 +73,6 @@ Deck.prototype.shuffleDeck = function() {
         shuffledDeck.push(this.deck[num]);
         this.deck.splice(num, 1);
     }
-    console.log(shuffledDeck);
 
     return shuffledDeck;
 }
@@ -82,6 +81,10 @@ Deck.prototype.popFromDeck = function() {
     var card = this.deck[this.deck.length - 1];
     this.deck.pop();
     return card;
+}
+
+Deck.prototype.getLength = function() {
+    return this.deck.length;
 }
 
 module.exports = Deck;
