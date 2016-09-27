@@ -37,8 +37,17 @@ Game.prototype.startGame = function(){
   //deal river card
   this.dealTableCards(1);
   //placeBet(4);
-  this.checkWinners();
+  //this.checkWinners();
   //payout
+}
+
+Game.prototype.checkPlayerOnTable = function(playerID){
+  for (var i = 0; i < players.length; i++) {
+    if (players[i].getID == playerID) {
+      return true;
+    }
+  }
+  return false;
 }
 
 Game.prototype.dealPlayerCards = function() {
@@ -50,7 +59,8 @@ Game.prototype.dealPlayerCards = function() {
 
 Game.prototype.dealTableCards = function(num) {
     for(var i = 0; i < num; i++) {
-        if (tableCards.length > 5) {
+				console.log(this.deck.getLength());
+        if (this.deck.getLength() > 5) {
             this.tableCards.push(this.deck.popFromDeck());
         }
     }
@@ -82,8 +92,6 @@ Game.prototype.checkHand = function(player) {
   if (checkRoyalFlush(playerHand)){
     player.setHandValue(9, 14);
   }
-
-
 }
 
 Game.prototype.sortNumber = function(a, b){
@@ -221,26 +229,20 @@ Game.prototype.checkStraightFlush = function(playerHand){
 			cardsToCheck = suits[i];
 	}
 
-  cardsToCheck.sort(sortNumber);
+  cardsToCheck.sort(this.sortNumber);
+	console.log(cardsToCheck[0].value);
+  var straightCheck = [];
 
-  straightCheck = [];
-
-  for (var i = 0; i < cardsToCheck.length; i++) {
-    if ((cardsToCheck[i] - cardsToCheck[i+1]) = -1){
-      straightCheck.push(-1)
+  for (var i = 0; i < cardsToCheck.length - 1; i++) {
+    if ((cardsToCheck[i].value - cardsToCheck[i+1].value) == -1 && straightCheck.length <= 5){
+      straightCheck.push(1);
+    } else {
+      straightCheck = [];
     }
   }
 
-
-
-
-
-
-
-
-
+	return straightCheck;
 }
-
 
 
 

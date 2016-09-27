@@ -7,6 +7,7 @@ var expect = chai.expect;
 
 var Game = require('../game/game.js');
 var Deck = require('../game/deck.js');
+var Player = require('../game/player.js');
 
 describe('Deck', function() {
     it('should return a full deck of 52 cards', function(done) {
@@ -100,15 +101,21 @@ describe('Deck', function() {
 describe('Game', function() {
     it('should initially deal two cards to each player', function(done) {
 
-        var game = new Game(new Deck());
+        var players = []
+        for (var i = 0; i < 5; i++){
+            players.push(new Player());
+        }
 
-        var players = game.getPlayers();
+        var game = new Game(players);
 
-        expect(players[0]).to.have.length(2);
-        expect(players[1]).to.have.length(2);
-        expect(players[2]).to.have.length(2);
-        expect(players[3]).to.have.length(2);
-        expect(players[4]).to.have.length(2);
+        console.log(players)
+        game.dealPlayerCards();
+
+        expect(players[0].getHand()).to.have.length(2);
+        expect(players[1].getHand()).to.have.length(2);
+        expect(players[2].getHand()).to.have.length(2);
+        expect(players[3].getHand()).to.have.length(2);
+        expect(players[4].getHand()).to.have.length(2);
         done();
     });
 
@@ -129,7 +136,34 @@ describe('Game', function() {
         expect(table).to.have.length(3);
         done();
     });
+
+    it('should check for a straight flush', function(done) {
+        var game = new Game(new Deck());
+
+        // Player Hand
+        var playerHand = [
+            { suit: 'club', value: 14 },
+            { suit: 'spade', value: 1 }
+            ];
+        
+        // Straight flush using table cards
+        game.tableCards = [
+            { suit: 'heart', value: 3 },
+            { suit: 'heart', value: 4 },
+            { suit: 'heart', value: 5 },
+            { suit: 'heart', value: 6 },
+            { suit: 'heart', value: 7 }
+        ];
+
+        var straightCheck = game.checkStraightFlush(playerHand);
+
+        expect(straightCheck).to.have.length(4);
+
+        console.log(straightCheck);
+        done();
+
+
+        
+    });
 });
-
-
 

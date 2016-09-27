@@ -71,7 +71,7 @@ Deck.prototype.shuffleDeck = function() {
         var num = Math.floor(Math.random() * i);
 
         shuffledDeck.push(this.deck[num]);
-            this.deck.splice(num, 1);
+        this.deck.splice(num, 1);
     }
 
     return shuffledDeck;
@@ -81,6 +81,10 @@ Deck.prototype.popFromDeck = function() {
     var card = this.deck[this.deck.length - 1];
     this.deck.pop();
     return card;
+}
+
+Deck.prototype.getLength = function() {
+    return this.deck.length;
 }
 
 module.exports = Deck;
