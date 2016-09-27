@@ -12,8 +12,6 @@ var Player = require('./player');
   two pair            30
   one pair            20
   high card           10
-
-
 */
 
 
@@ -29,13 +27,13 @@ Game.prototype.startGame = function(){
   this.dealPlayerCards();
   //placeBet(1);
   //deal table cards
-  this.dealTableCards(3);
+  //this.dealTableCards(3);
   //placeBet(2);
   //deal turn card
-  this.dealTableCards(1);
+  //this.dealTableCards(1);
   //placeBet(3);
   //deal river card
-  this.dealTableCards(1);
+  //this.dealTableCards(1);
   //placeBet(4);
   //this.checkWinners();
   //payout
@@ -63,6 +61,16 @@ Game.prototype.payout = function(winners) {
     return payout
 }
 
+Game.prototype.getPlayerCards = function() {
+	var playerCards = [];
+
+	for(var i = 0; i < players.length; players++) {
+		playerCards = playerCards.concat(players[i].getHand());
+	}
+	
+	return playerCards;
+}
+
 Game.prototype.getTableCards = function() {
     return this.tableCards;
 }
@@ -83,8 +91,6 @@ Game.prototype.checkHand = function(player) {
   if (checkRoyalFlush(playerHand)){
     player.setHandValue(9, 14);
   }
-
-
 }
 
 Game.prototype.sortNumber = function(a, b){
