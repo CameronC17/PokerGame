@@ -73,55 +73,174 @@ Game.prototype.getPlayers = function() {
 Game.prototype.checkWinners = function() {
   for (var i = 0; i < players.length; i++) {
     //players[i].handValue = this.checkHand(players[i]);
-    players[i].setHandValue(this.checkHand(players[i]);
+    this.checkHand(players[i]);
   }
 }
 
 Game.prototype.checkHand = function(player) {
   var playerHand = player.getHand();
-  playerHand = playerHand.concat(this.tableCards);
-
-  this.checkRoyalFlush(){
-    var indexes = [];
-    for (var val = 10; val < 15; val++){
-      var index = this.arrayObjectIndexOf(playerHand,  val, 'value');
-      if (index !== -1){
-        indexes = indexes.concat(index);
-      }
-
-    }
-
-  };
-  //this.checkStraightFlush();
-  //
-
-  //return handValue
-}
-
-Game.prototype.arrayObjectIndexOf = function(myArray, searchTerm, property) {
-  var indexes = [];
-    for(var i = 0, len = myArray.length; i < len; i++) {
-      if (myArray[i][property] === searchTerm) indexes.push(i);
-    }
-
-  if (indexes.length > 0) {
-    return indexes;
-  } else {
-    return -1;
+  if (checkRoyalFlush(playerHand)){
+    player.setHandValue(9, 14);
   }
 
+
 }
 
-Game.prototype.checkSuit = functions(indexes, playerHand){
-  var heart = [];
-  var diamond = [];
-  var spade = [];
-  var club = [];
+Game.prototype.sortNumber = function(a, b){
+  return a - b;
+}
 
-  for ( var i = 0; i < indexes.length; i++){
-    
+Game.prototype.checkRoyalFlush = function(playerHand) {
+	//check if hand has 5 of the same suit
+	//heart, diamond, spade, club
+	var suits = [[], [], [], []];
+	//checks player hand
+	for (var i = 0; i < 2; i++) {
+		switch (playerHand[i].suit) {
+			case "heart":
+				suits[0].push(playerHand[i]);
+				break;
+			case "diamond":
+				suits[1].push(playerHand[i]);
+				break;
+			case "spade":
+				suits[2].push(playerHand[i]);
+				break;
+			case "club":
+				suits[3].push(playerHand[i]);
+				break;
+
+		}
+	}
+
+	//checks table cards
+	for (var i = 0; i < 5; i++) {
+		switch (this.tableCards[i].suit) {
+			case "heart":
+				suits[0].push(this.tableCards[i]);
+				break;
+			case "diamond":
+				suits[1].push(this.tableCards[i]);
+				break;
+			case "spade":
+				suits[2].push(this.tableCards[i]);
+				break;
+			case "club":
+				suits[3].push(this.tableCards[i]);
+				break;
+		}
+	}
+
+	var cardsToCheck = null;
+
+	for (var i = 0; i < 4; i++) {
+		if (suits[i].length >= 5)
+			cardsToCheck = suits[i];
+	}
+
+	//if we have 5 of the same suit, we can get a royal flush
+	if (cardsToCheck != null) {
+		var checkStraight = [false, false, false, false, false];
+		for (var i = 0; i < cardsToCheck.length; i++) {
+			switch (cardsToCheck[i].value) {
+				case 10:
+					checkStraight[0] = true;
+					break;
+				case 11:
+					checkStraight[1] = true;
+					break;
+				case 12:
+					checkStraight[2] = true;
+					break;
+				case 13:
+					checkStraight[3] = true;
+					break;
+				case 14:
+					checkStraight[4] = true;
+					break;
+				default:
+					break;
+			}
+		}
+
+		if (checkStraight[0] == true && checkStraight[1] == true && checkStraight[2] == true && checkStraight[3] == true && checkStraight[4] == true) {
+			console.log("yes");
+      return true;
+		} else {
+			console.log("no");
+      return false;
+		}
+	} else {
+		console.log("no");
+    return false;
   }
 }
+
+Game.prototype.checkStraightFlush = function(playerHand){
+  var suits = [[], [], [], []];
+  //checks player hand
+  for (var i = 0; i < 2; i++) {
+    switch (playerHand[i].suit) {
+      case "heart":
+        suits[0].push(playerHand[i]);
+        break;
+      case "diamond":
+        suits[1].push(playerHand[i]);
+        break;
+      case "spade":
+        suits[2].push(playerHand[i]);
+        break;
+      case "club":
+        suits[3].push(playerHand[i]);
+        break;
+
+    }
+  }
+  //checks table cards
+	for (var i = 0; i < 5; i++) {
+		switch (this.tableCards[i].suit) {
+			case "heart":
+				suits[0].push(this.tableCards[i]);
+				break;
+			case "diamond":
+				suits[1].push(this.tableCards[i]);
+				break;
+			case "spade":
+				suits[2].push(this.tableCards[i]);
+				break;
+			case "club":
+				suits[3].push(this.tableCards[i]);
+				break;
+		}
+	}
+
+	var cardsToCheck = null;
+
+	for (var i = 0; i < 4; i++) {
+		if (suits[i].length >= 5)
+			cardsToCheck = suits[i];
+	}
+
+  cardsToCheck.sort(sortNumber);
+
+  straightCheck = [];
+
+  for (var i = 0; i < cardsToCheck.length; i++) {
+    if ((cardsToCheck[i] - cardsToCheck[i+1]) = -1){
+      straightCheck.push(-1)
+    }
+  }
+
+
+
+
+
+
+
+
+
+}
+
 
 
 
