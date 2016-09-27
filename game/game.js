@@ -1,16 +1,38 @@
 var Deck = require('./deck');
+var Player = require('./player');
 
-function Game() {
+
+function Game(players) {
     this.deck = new Deck();
     this.tableCards = [];
-    this.players = [[],[],[],[],[]];
-    this.dealInitial();
+    this.players = players;
+    this.pot = 0;
+    this.startGame();
 }
 
-Game.prototype.dealInitial = function() {
+Game.prototype.startGame = function(){
+  //Deal 2 cards to the players
+  this.dealPlayerCards();
+  //placeBet(1);
+  //deal table cards
+  // this.dealTableCards(3);
+  //placeBet(2);
+  //deal turn card
+  // this.dealTableCards(1);
+  //placeBet(3);
+  //deal river card
+  // this.dealTableCards(1);
+  //placeBet(4);
+  //reveal
+  // this.reveal();
+  check winner(check)
+  //payout
+}
+
+Game.prototype.dealPlayerCards = function() {
     for(var i = 0; i < this.players.length; i++) {
-        this.players[i].push(this.deck.popFromDeck());
-        this.players[i].push(this.deck.popFromDeck());
+        this.players[i].addCard(this.deck.popFromDeck());
+        this.players[i].addCard(this.deck.popFromDeck());
     }
 }
 
@@ -23,9 +45,9 @@ Game.prototype.dealTableCards = function(num) {
 }
 
 Game.prototype.payout = function(winners) {
-    for(var i = 0; i < winners.length; i++) {
-        
-    }
+      var payout = this.pot/winners.length;
+
+    return payout
 }
 
 Game.prototype.getTableCards = function() {
@@ -35,5 +57,18 @@ Game.prototype.getTableCards = function() {
 Game.prototype.getPlayers = function() {
     return this.players;
 }
+
+Game.prototype.checkWinners = function() {
+  for (var i = 0; i < players.length; i++) {
+    this.checkHand(players[i]);
+  }
+}
+
+Game.prototype.checkHand = function(player) {
+
+  //return handValue
+}
+
+
 
 module.exports = Game;
