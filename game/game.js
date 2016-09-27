@@ -41,6 +41,15 @@ Game.prototype.startGame = function(){
   //payout
 }
 
+Game.prototype.checkPlayerOnTable = function(playerID){
+  for (var i = 0; i < players.length; i++) {
+    if (players[i].getID == playerID) {
+      return true;
+    }
+  }
+  return false;
+}
+
 Game.prototype.dealPlayerCards = function() {
     for(var i = 0; i < this.players.length; i++) {
         this.players[i].addCard(this.deck.popFromDeck());
@@ -83,8 +92,6 @@ Game.prototype.checkHand = function(player) {
   if (checkRoyalFlush(playerHand)){
     player.setHandValue(9, 14);
   }
-
-
 }
 
 Game.prototype.sortNumber = function(a, b){
@@ -236,8 +243,6 @@ Game.prototype.checkStraightFlush = function(playerHand){
 
 	return straightCheck;
 }
-
-
 
 
 
