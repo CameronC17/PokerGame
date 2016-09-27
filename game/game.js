@@ -50,7 +50,7 @@ Game.prototype.dealPlayerCards = function() {
 
 Game.prototype.dealTableCards = function(num) {
     for(var i = 0; i < num; i++) {
-        if (this.tableCards.length < 5) {
+        if (tableCards.length > 5) {
             this.tableCards.push(this.deck.popFromDeck());
         }
     }
@@ -226,10 +226,14 @@ Game.prototype.checkStraightFlush = function(playerHand){
   straightCheck = [];
 
   for (var i = 0; i < cardsToCheck.length; i++) {
-    if ((cardsToCheck[i] - cardsToCheck[i+1]) = -1){
-      straightCheck.push(-1)
+    if ((cardsToCheck[i] - cardsToCheck[i+1]) == -1 && straightCheck.length <= 5){
+      straightCheck.push(1);
+    } else {
+      straightCheck = [];
     }
   }
+
+  if 
 
 
 
