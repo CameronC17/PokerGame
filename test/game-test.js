@@ -129,7 +129,7 @@ describe('Game', function() {
         done();
     });
 
-    xit('should check for a straight flush', function(done) {
+    it('should check for a straight flush', function(done) {
         var game = new Game();
 
         // Player Hand
@@ -155,7 +155,9 @@ describe('Game', function() {
         done();
     });
 
-    xit('should check for a four-of-a-kind', function(done) {
+    it('should check for a four-of-a-kind', function(done) {
+        var game = new Game();
+
         var playerHand = [
             { suit: 'club', value: 10 },
             { suit: 'spade', value: 10 }
@@ -171,7 +173,7 @@ describe('Game', function() {
         ];
 
         // returns true because we have four of a kind
-        var fourOfAKindCheck = game.checkFourOfAKind(playerHand);
+        var fourOfAKindCheck = game.checkFour(playerHand);
 
         //pass condition
         expect(fourOfAKindCheck).to.equal(true);

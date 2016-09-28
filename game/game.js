@@ -103,7 +103,7 @@ Game.prototype.checkHand = function(player) {
 }
 
 Game.prototype.sortNumber = function(a, b){
-  return a - b;
+  return a.value - b.value;
 }
 
 Game.prototype.checkRoyalFlush = function(playerHand) {
@@ -299,9 +299,11 @@ Game.prototype.checkFlush = function(playerHand) {
 
 Game.prototype.checkFour = function(playerHand){
 
-  var cardsToCheck = playerHand.concat(tableCards);
+  var cardsToCheck = playerHand.concat(this.tableCards);
 
   cardsToCheck.sort(this.sortNumber);
+	
+	console.log(cardsToCheck);
 
   var fourCheck = [];
 
