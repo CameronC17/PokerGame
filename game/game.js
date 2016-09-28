@@ -407,7 +407,7 @@ Game.prototype.checkTwoPairs = function(playerHand){
 
   cardsToCheck.sort(this.sortNumber);
 
-  var remove = this.checkMultiple(playerHand, 2);
+  var remove = this.checkMultiple(cardsToCheck, 2);
   console.log('remove',remove);
 
 
