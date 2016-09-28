@@ -186,7 +186,7 @@ describe('Game', function() {
             { suit: 'heart', value: 14 }
         ];
 
-        var fourCheck = checkHand(players[0]);
+        var fourCheck = game.checkHand(players[0]);
 
         //pass condition
         expect(players[0].handValue[7]).to.equal('10');
@@ -282,6 +282,8 @@ describe('Game', function() {
         ];
 
         var suits = game.checkHand(players[0]);
+        
+        console.log(players[0].handValue);
 
         expect(players[0].handValue[5]).to.equal(10);
         done();

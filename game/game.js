@@ -268,9 +268,6 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
 }
 
 Game.prototype.checkStraightFlush = function(playerHand){
-	console.log("straight flush");
-	console.log(playerHand);
-	console.log(this.tableCards);
   var suits = [[], [], [], []];
   //checks player hand
   for (var i = 0; i < 2; i++) {
@@ -315,21 +312,24 @@ Game.prototype.checkStraightFlush = function(playerHand){
 			cardsToCheck = suits[i];
 	}
 
-  cardsToCheck.sort(this.sortNumber);
-  var straightCheck = [];
+	if (cardsToCheck != null) {
+		cardsToCheck.sort(this.sortNumber);
+  	var straightCheck = [];
 
-  for (var i = 0; i < cardsToCheck.length - 1; i++) {
-    if ((cardsToCheck[i].value - cardsToCheck[i+1].value) == -1){
-      straightCheck.push(cardsToCheck[i].value);
-    } else if(straightCheck.length != 4) {
-      straightCheck = [];
+  	for (var i = 0; i < cardsToCheck.length - 1; i++) {
+    	if ((cardsToCheck[i].value - cardsToCheck[i+1].value) == -1){
+      	straightCheck.push(cardsToCheck[i].value);
+    	} else if(straightCheck.length != 4) {
+      	straightCheck = [];
+			}
+  	}
+
+		if (straightCheck.length == 4) {
+			return (straightCheck[straightCheck.length - 1] + 1);
 		}
-  }
+	}
 
-	console.log(straightCheck);
-	console.log(straightCheck[straightCheck.length - 1] + 1);
-	return (straightCheck[straightCheck.length - 1] + 1);
-
+	return false;
 }
 
 Game.prototype.checkFlush = function(playerHand) {
@@ -370,6 +370,8 @@ Game.prototype.checkFlush = function(playerHand) {
 		}
 	}
 
+	console.log("FLUSH: ", suits);
+	
 	for (var i = 0; i < 4; i++) {
 		if (suits[i].length >= 5)
 			return suits[i][suits[i].length - 1].value;
@@ -394,16 +396,11 @@ Game.prototype.checkMultiple = function(cardsToCheck, num){  //applies for fours
     }
 	}
 
-	console.log("counts", counts);
-
 	var values = Object.keys(counts).map(function(k){return counts[k]});
-	console.log("suah;r");
-	console.log(values[0]);
 
 	for (var i = 0; i < values.length; i++) {
 		if (values[i] == num) {
 			var key = Object.keys(counts).filter(function(key) {return counts[key] === values[i]})[0];
-			console.log(key)
 			return key ;
 		}
 	}
@@ -448,7 +445,6 @@ Game.prototype.straight = function(playerHand){
   var cardsToCheck = playerHand.concat(this.tableCards);
 
   cardsToCheck.sort(this.sortNumber);
-	console.log("straight cards to check", cardsToCheck);
   var straightCheck = [];
 
   for (var i = 0; i < cardsToCheck.length - 1; i++) {
@@ -458,8 +454,6 @@ Game.prototype.straight = function(playerHand){
       straightCheck = [];
     }
   }
-
-	console.log(straightCheck);
 
   if (straightCheck.length == 4) {
     return straightCheck[straightCheck.length - 1] + 1;
