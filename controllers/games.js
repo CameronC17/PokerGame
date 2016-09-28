@@ -8,7 +8,7 @@ function joinGame(req, res) {
 
 function controlGame(req, res) {
   //checks what user we are playing as
-  console.log(req.user);
+  console.log(req.body.user);
   if(req.session.user != undefined) {
     console.log(req.body);
   } else {

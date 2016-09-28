@@ -297,11 +297,10 @@ Game.prototype.checkFlush = function(playerHand) {
 
 }
 
-Game.prototype.checkMultiple = function(playerHand, num){  //applies for fours, three of a kind and doubles
-
-  var cardsToCheck = playerHand.concat(this.tableCards);
+Game.prototype.checkMultiple = function(cardsToCheck, num){  //applies for fours, three of a kind and doubles
 
   cardsToCheck.sort(this.sortNumber);
+	console.log(cardsToCheck)
 
 
 /* [ { suit: 'club', value: 2 },
@@ -327,7 +326,7 @@ Game.prototype.checkMultiple = function(playerHand, num){  //applies for fours, 
 
 	var values = Object.keys(counts).map(function(k){return counts[k]});
 	console.log("suah;r");
-	console.log(values);
+	console.log(values[0]);
 
 	for (var i = 0; i < values.length; i++) {
 		if (values[i] == num) {
@@ -345,7 +344,7 @@ Game.prototype.checkFullHouse = function(playerHand){
 
   cardsToCheck.sort(this.sortNumber);
 
-  var remove = this.checkMultiple(playerHand, 3);
+  var remove = this.checkMultiple(cardsToCheck, 3);
   console.log('remove',remove);
 
 
@@ -354,19 +353,17 @@ Game.prototype.checkFullHouse = function(playerHand){
       if(cardsToCheck[i].value == remove) {
           cardsToCheck.splice(i, 1);
           i--;
-
       }
     }
 
     console.log('cards left',cardsToCheck);
 
-    remove = this.checkMultiple(playerHand, 2);
+    remove = this.checkMultiple(cardsToCheck, 2);
 
     for(var i = 0; i < cardsToCheck.length; i++) {
       if(cardsToCheck[i].value == remove) {
           cardsToCheck.splice(i, 1);
           i--;
-
       }
     }
 
