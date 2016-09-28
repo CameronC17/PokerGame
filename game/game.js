@@ -302,21 +302,42 @@ Game.prototype.checkFour = function(playerHand){
   var cardsToCheck = playerHand.concat(this.tableCards);
 
   cardsToCheck.sort(this.sortNumber);
-	
-	console.log(cardsToCheck);
 
   var fourCheck = [];
 
-  for (var i = 0; i < cardsToCheck.length - 1; i++) {
-    if ((cardsToCheck[i].value - cardsToCheck[i+1].value) == 0 && fourCheck.length <= 4){
-      fourCheck.push(cardsToCheck[i]);
+/* [ { suit: 'club', value: 2 },
+  { suit: 'club', value: 10 },
+  { suit: 'spade', value: 10 },
+  { suit: 'heart', value: 10 },
+  { suit: 'diamond', value: 10 },
+  { suit: 'spade', value: 2 },
+  { suit: 'heart', value: 14 } ] */
+
+	var counts = {}, i, value;
+	// We did not copy this
+	for (i = 0; i < cardsToCheck.length; i++) {
+    value = cardsToCheck[i].value;
+    if (typeof counts[value] === "undefined") {
+        counts[value] = 1;
     } else {
-      straightCheck = [];
+        counts[value]++;
     }
-  }
+	}
 
+	console.log("counts", counts);
+
+	var values = Object.keys(counts).map(function(k){return counts[k]});
+	console.log("suah;r");
+	console.log(values);
+
+	for (var i = 0; i < values.length; i++) {
+		if (values[i] == 4) {
+			var key = Object.keys(counts).filter(function(key) {return counts[key] === values[i]})[0];
+			console.log(key)
+			return key ;
+		}
+	}
+	return false;
 }
-
-
 
 module.exports = Game;

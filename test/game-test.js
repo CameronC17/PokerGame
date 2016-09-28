@@ -134,17 +134,17 @@ describe('Game', function() {
 
         // Player Hand
         var playerHand = [
-            { suit: 'club', value: 14 },
+            { suit: 'club', value: 2 },
             { suit: 'spade', value: 1 }
             ];
         
         // Straight flush using table cards
         game.tableCards = [
             { suit: 'heart', value: 3 },
-            { suit: 'heart', value: 4 },
             { suit: 'heart', value: 5 },
             { suit: 'heart', value: 6 },
-            { suit: 'heart', value: 7 }
+            { suit: 'heart', value: 7 },
+            { suit: 'heart', value: 4 }
         ];
 
         var straightCheck = game.checkStraightFlush(playerHand);
@@ -168,15 +168,15 @@ describe('Game', function() {
             { suit: 'heart', value: 10 },
             { suit: 'diamond', value: 10 },
             { suit: 'club', value: 2 },
-            { suit: 'spade', value: 8 },
-            { suit: 'heart', value: 3 }
+            { suit: 'spade', value: 2 },
+            { suit: 'heart', value: 14 }
         ];
 
         // returns true because we have four of a kind
         var fourOfAKindCheck = game.checkFour(playerHand);
 
         //pass condition
-        expect(fourOfAKindCheck).to.equal(true);
+        expect(fourOfAKindCheck).to.equal('10');
         done();
     });
 
@@ -204,8 +204,7 @@ describe('Game', function() {
 
         var suits = game.checkFlush(playerHand);
 
-        expect(suits).to.have.length(5);
-        expect(suits[0].suit).to.equal("spade");
+        expect(suits).to.equal(true);
         done()
     });
 });
