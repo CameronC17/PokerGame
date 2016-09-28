@@ -339,6 +339,71 @@ Game.prototype.checkMultiple = function(playerHand, num){  //applies for fours, 
 	return false;
 }
 
+Game.prototype.checkFullHouse = function(playerHand){
+
+  var cardsToCheck = playerHand.concat(this.tableCards);
+
+  cardsToCheck.sort(this.sortNumber);
+
+  var remove = this.checkMultiple(playerHand, 3);
+  console.log('remove',remove);
+
+
+  if (remove != false){
+    for(var i = 0; i < cardsToCheck.length; i++) {
+      if(cardsToCheck[i].value == remove) {
+          cardsToCheck.splice(i, 1);
+          i--;
+
+      }
+    }
+
+    console.log('cards left',cardsToCheck);
+
+    remove = this.checkMultiple(playerHand, 2);
+
+    for(var i = 0; i < cardsToCheck.length; i++) {
+      if(cardsToCheck[i].value == remove) {
+          cardsToCheck.splice(i, 1);
+          i--;
+
+      }
+    }
+
+    console.log('cards left', cardsToCheck);
+
+    if (cardsToCheck.length <= 2){
+      return true;
+    }
+  }
+    return false;
+
+
+}
+
+
+Game.prototype.straight = function(playerHand){
+
+  var cardsToCheck = playerHand.concat(this.tableCards);
+
+  cardsToCheck.sort(this.sortNumber);
+	console.log(cardsToCheck[0].value);
+  var straightCheck = [];
+
+  for (var i = 0; i < cardsToCheck.length - 1; i++) {
+    if ((cardsToCheck[i].value - cardsToCheck[i+1].value) == -1 && straightCheck.length <= 5){
+      straightCheck.push(cardsToCheck[i].value);
+    } else {
+      straightCheck = [];
+    }
+  }
+  if (straightCheck.length == 4) {
+    return straightCheck;
+  }
+  return false;
+}
+
+
 
 
 
