@@ -3,7 +3,7 @@ Creating a poker game using NodeJS, non socket.io style-y.
 
 ## API DOC
 
-DevOps Hooks
+DevOps Hooks Test to Automate
 
 ### Users
 
