@@ -35,8 +35,17 @@ function addUserToPool(userinfo, req, res) {
 }
 
 function controlGame(req, res) {
-  console.log(req.body);
-  //res.send(200);
+  // console.log(req.body.bet);
+  if(req.body.bet > 0){
+    console.log(req.body.bet)
+  }else if(req.body.call == 'true'){
+    console.log('calling');
+  }else if(req.body.check == 'true'){
+    console.log('checking');
+  }else if(req.body.fold == 'true'){
+    console.log('folding');
+  }
+  res.sendStatus(200);
 }
 
 function getUserCredentials(userID, callback, req, res){
