@@ -131,7 +131,7 @@ describe('Game', function() {
     });
 
     it('should check for a straight flush', function(done) {
-        var game = new Game(new Deck());
+        var game = new Game();
 
         // Player Hand
         var playerHand = [
@@ -154,8 +154,59 @@ describe('Game', function() {
 
         console.log(straightCheck);
         done();
+    });
+
+    it('should check for a four-of-a-kind', function(done) {
+        var game = new Game();
+
+        var playerHand = [
+            { suit: 'club', value: 10 },
+            { suit: 'spade', value: 10 }
+            ];
+
+        // Four-of-a-kind using two hand cards and two table cards
+        game.tableCards = [
+            { suit: 'heart', value: 10 },
+            { suit: 'diamond', value: 10 },
+            { suit: 'club', value: 2 },
+            { suit: 'spade', value: 8 },
+            { suit: 'heart', value: 3 }
+        ];
+
+        // returns true because we have four of a kind
+        var fourOfAKindCheck = game.checkFour(playerHand);
+
+        //pass condition
+        expect(fourOfAKindCheck).to.equal(true);
+        done();
+    });
+
+    it('should check for a flush', function(done) {
+        var players = []
+        for (var i = 0; i < 5; i++){
+            players.push(new Player());
+        }
+
+        var game = new Game(players);
 
 
+        var playerHand = [
+            { suit: 'spade', value: 5 },
+            { suit: 'spade', value: 3 }
+        ];
 
+        game.tableCards = [
+            { suit: 'spade', value: 7 },
+            { suit: 'spade', value: 9 },
+            { suit: 'spade', value: 10 },
+            { suit: 'heart', value: 8 },
+            { suit: 'heart', value: 3 }
+        ];
+
+        var suits = game.checkFlush(playerHand);
+
+        expect(suits).to.have.length(5);
+        expect(suits[0].suit).to.equal("spade");
+        done()
     });
 });

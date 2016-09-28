@@ -24,6 +24,6 @@ router.route('/games/')
       .post(gamesController.control);
 
 router.route('/games/new')
-      .get(gamesController.create);
+      .post(gamesController.create);
 
 module.exports = router;

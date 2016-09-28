@@ -12,8 +12,6 @@ var Player = require('./player');
   two pair            30
   one pair            20
   high card           10
-
-
 */
 
 
@@ -29,13 +27,13 @@ Game.prototype.startGame = function(){
   this.dealPlayerCards();
   //placeBet(1);
   //deal table cards
-  this.dealTableCards(3);
+  //this.dealTableCards(3);
   //placeBet(2);
   //deal turn card
-  this.dealTableCards(1);
+  //this.dealTableCards(1);
   //placeBet(3);
   //deal river card
-  this.dealTableCards(1);
+  //this.dealTableCards(1);
   //placeBet(4);
   //this.checkWinners();
   //payout
@@ -72,6 +70,16 @@ Game.prototype.payout = function(winners) {
     return payout
 }
 
+Game.prototype.getPlayerCards = function() {
+	var playerCards = [];
+
+	for(var i = 0; i < this.players.length; i++) {
+		playerCards.push(this.players[i].getHand());
+	}
+
+	return playerCards;
+}
+
 Game.prototype.getTableCards = function() {
     return this.tableCards;
 }
@@ -95,7 +103,7 @@ Game.prototype.checkHand = function(player) {
 }
 
 Game.prototype.sortNumber = function(a, b){
-  return a - b;
+  return a.value - b.value;
 }
 
 Game.prototype.checkRoyalFlush = function(playerHand) {
@@ -242,6 +250,71 @@ Game.prototype.checkStraightFlush = function(playerHand){
   }
 
 	return straightCheck;
+}
+
+Game.prototype.checkFlush = function(playerHand) {
+	var suits = [[], [], [], []];
+	for (var i = 0; i < 2; i++) {
+		switch (playerHand[i].suit) {
+			case "heart":
+				suits[0].push(playerHand[i]);
+				break;
+			case "diamond":
+				suits[1].push(playerHand[i]);
+				break;
+			case "spade":
+				suits[2].push(playerHand[i]);
+				break;
+			case "club":
+				suits[3].push(playerHand[i]);
+				break;
+		}
+	}
+
+	//checks table cards
+	for (var i = 0; i < 5; i++) {
+		switch (this.tableCards[i].suit) {
+			case "heart":
+				suits[0].push(this.tableCards[i]);
+				break;
+			case "diamond":
+				suits[1].push(this.tableCards[i]);
+				break;
+			case "spade":
+				suits[2].push(this.tableCards[i]);
+				break;
+			case "club":
+				suits[3].push(this.tableCards[i]);
+				break;
+		}
+	}
+
+	for (var i = 0; i < 4; i++) {
+		if (suits[i].length >= 5)
+			return true;
+	}
+  return false;
+
+}
+
+Game.prototype.checkFour = function(playerHand){
+
+  var cardsToCheck = playerHand.concat(this.tableCards);
+
+  cardsToCheck.sort(this.sortNumber);
+	
+	console.log(cardsToCheck);
+
+  var fourCheck = [];
+
+  for (var i = 0; i < cardsToCheck.length - 1; i++) {
+    if ((cardsToCheck[i].value - cardsToCheck[i+1].value) == 0 && fourCheck.length <= 4){
+      fourCheck.push(cardsToCheck[i]);
+    } else {
+      straightCheck = [];
+    }
+  }
+
 }
 
 
