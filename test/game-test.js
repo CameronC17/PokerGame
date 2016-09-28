@@ -305,5 +305,9 @@ describe('Game', function() {
       //pass condition
       expect(high).to.equal(11);
       done();
+    });
+
+    it('should check the players hand', function(done) {
+        
     })
 });
