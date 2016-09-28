@@ -252,6 +252,4 @@ Game.prototype.checkStraightFlush = function(playerHand){
 	return straightCheck;
 }
 
-
-
 module.exports = Game;
