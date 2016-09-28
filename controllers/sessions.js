@@ -15,10 +15,10 @@ function createSession(req, res) {
         if (user && user.password == req.body.password) {
             // Sets the session user id to equal the logged in user id.
             req.session.user = user.id;
-            console.log(req.session);
             console.log("user logged in "+ req.body.username );
             res.status(200).send({
-              "user" : user.id
+              "user" : user.id,
+              "username" : user.username
             });
         } else {
             if (err) {

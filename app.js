@@ -38,17 +38,18 @@ app.use(methodOverride(function(req, res){
 
 // load current user
 app.use(function (req, res, next) {
-  console.log(req.session);
-	if (!req.session.user) {
+  //console.log(req.body.user);
+	if (!req.body.user) {
 		res.locals.user = false;
 		next();
 	} else {
-		User.findById(req.session.user, function(err, user) {
+		User.findById(req.body.user, function(err, user) {
 			if (user) {
+        console.log(user.username);
 				req.user = user;
 				res.locals.user = user;
 			} else {
-				req.session.user = null;
+				req.body.user = null;
 				delete res.locals.user;
 			}
 			next(err);
