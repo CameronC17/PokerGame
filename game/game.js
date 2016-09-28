@@ -109,6 +109,19 @@ Game.prototype.checkWinners = function() {
     //players[i].handValue = this.checkHand(players[i]);
     this.checkHand(players[i]);
   }
+
+	var handIndexes = [];
+
+	// For each player, get their hand value index.
+	// The player with the highest index wins.
+	// Need to add logic for players with the same index.
+	for (var i = 0; i < players.length; i++) {
+		for (var j = 0; j < 10; j++) {
+			if (players[i].handVal[j] != null) {
+				handIndexes.push(j);
+			}
+		}
+	}
 }
 
 Game.prototype.checkHand = function(player) {
