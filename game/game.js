@@ -339,9 +339,4 @@ Game.prototype.checkMultiple = function(playerHand, num){  //applies for fours, 
 	return false;
 }
 
-
-
-
-
-
 module.exports = Game;
