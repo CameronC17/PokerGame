@@ -20,11 +20,13 @@ function Game(players) {
     this.tableCards = [];
     this.players = players;
     this.pot = 0;
+    this.turnCounter= null;
 }
 
 Game.prototype.startGame = function(){
   //Deal 2 cards to the players
   this.dealPlayerCards();
+  this.turnCounter = 0;
   //placeBet(1);
   //deal table cards
   //this.dealTableCards(3);
@@ -51,20 +53,34 @@ Game.prototype.checkPlayerOnTable = function(playerID){
 Game.prototype.actionBet = function (seatPosition, betAmount) {
   // console.log(seatPosition, betAmount);
   players[seatPosition].command(betAmount);
+  this.actionTime(seatPosition);
 };
 
 Game.prototype.actionCall = function (seatPosition) {
   // console.log(seatPosition + ' call');
   players[seatPosition].command('call');
+  this.actionTime(seatPosition);
 };
 Game.prototype.actionFold = function (seatPosition) {
   // console.log(seatPosition + ' fold');
   players[seatPosition].command('fold');
+  this.actionTime(seatPosition);
 };
 Game.prototype.actionCheck = function (seatPosition) {
   // console.log(seatPosition + ' check');
   players[seatPosition].command('check');
+  this.actionTime(seatPosition);
 };
+
+Game.prototype.actionTime = function (seatNumber){
+  if(seatNumber == this.turnCounter){
+    // this is where the actions are going to be performed
+    this.turnCounter ++;
+    if(this.turnCounter >= this.players.length){
+      this.turnCounter= null;
+    }
+  }
+}
 
 
 Game.prototype.dealPlayerCards = function() {
@@ -374,7 +390,7 @@ Game.prototype.checkFlush = function(playerHand) {
 	}
 
 	console.log("FLUSH: ", suits);
-	
+
 	for (var i = 0; i < 4; i++) {
 		if (suits[i].length >= 5)
 			return suits[i][suits[i].length - 1].value;
