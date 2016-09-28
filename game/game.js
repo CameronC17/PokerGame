@@ -40,13 +40,29 @@ Game.prototype.startGame = function(){
 }
 
 Game.prototype.checkPlayerOnTable = function(playerID){
-  for (var i = 0; i < players.length; i++) {
-    if (players[i].getID == playerID) {
-      return true;
+  for (var i = 0; i < this.players.length; i++) {
+    if (this.players[i].id == playerID) {
+      return i;
     }
   }
   return false;
 }
+
+Game.prototype.actionBet = function (seatPosition, betAmount) {
+  console.log(seatPosition, betAmount);
+  //players[seatPosition].setBetAmount
+};
+
+Game.prototype.actionCall = function (seatPosition) {
+  console.log(seatPosition + ' call');
+};
+Game.prototype.actionFold = function (seatPosition) {
+  console.log(seatPosition + ' fold');
+};
+Game.prototype.actionCheck = function (seatPosition) {
+  console.log(seatPosition + ' check');
+};
+
 
 Game.prototype.dealPlayerCards = function() {
     for(var i = 0; i < this.players.length; i++) {

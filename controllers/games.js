@@ -35,15 +35,40 @@ function addUserToPool(userinfo, req, res) {
 }
 
 function controlGame(req, res) {
-  // console.log(req.body.bet);
+  if (req.body.user){
+    // getUserCredentials(req.body.user, performCommand, req, res);
+    var gameID = findUserInTable(req.body.user);
+    if (gameID[0] != null){
+      performCommand(gameID, req, res)
+    }else{
+      res.sendStatus(403);
+    }
+  }else{
+    res.sendStatus(403);
+  }
+}
+
+function findUserInTable(userID){
+    for (var i = 0; i < tables.length; i++){
+      var playerSeat = tables[i].checkPlayerOnTable(userID)
+      if(playerSeat >= 0){
+        return [i,playerSeat];
+      }
+
+    }
+    return null;
+
+
+}
+function performCommand(gameID, req, res){
   if(req.body.bet > 0){
-    console.log(req.body.bet)
+    tables[gameID[0]].actionBet(gameID[1], req.body.bet);
   }else if(req.body.call == 'true'){
-    console.log('calling');
+    tables[gameID[0]].actionCall(gameID[1]);
   }else if(req.body.check == 'true'){
-    console.log('checking');
+    tables[gameID[0]].actionCheck(gameID[1]);
   }else if(req.body.fold == 'true'){
-    console.log('folding');
+    tables[gameID[0]].actionFold(gameID[1]);
   }
   res.sendStatus(200);
 }
