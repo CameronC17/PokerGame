@@ -76,7 +76,7 @@ Game.prototype.getPlayerCards = function() {
 	for(var i = 0; i < this.players.length; i++) {
 		playerCards.push(this.players[i].getHand());
 	}
-	
+
 	return playerCards;
 }
 
@@ -291,10 +291,30 @@ Game.prototype.checkFlush = function(playerHand) {
 
 	for (var i = 0; i < 4; i++) {
 		if (suits[i].length >= 5)
-			return suits[i];
+			return true;
 	}
-
+  return false;
 
 }
+
+Game.prototype.checkFour = function(playerHand){
+
+  var cardsToCheck = playerHand.concat(tableCards);
+
+  cardsToCheck.sort(this.sortNumber);
+
+  var fourCheck = [];
+
+  for (var i = 0; i < cardsToCheck.length - 1; i++) {
+    if ((cardsToCheck[i].value - cardsToCheck[i+1].value) == 0 && fourCheck.length <= 4){
+      fourCheck.push(cardsToCheck[i]);
+    } else {
+      straightCheck = [];
+    }
+  }
+
+}
+
+
 
 module.exports = Game;
