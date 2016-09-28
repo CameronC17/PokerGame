@@ -45,7 +45,6 @@ app.use(function (req, res, next) {
 	} else {
 		User.findById(req.body.user, function(err, user) {
 			if (user) {
-        console.log(user.username);
 				req.user = user;
 				res.locals.user = user;
 			} else {
