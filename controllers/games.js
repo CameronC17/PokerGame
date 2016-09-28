@@ -8,10 +8,13 @@ function joinGame(req, res) {
 
 function controlGame(req, res) {
   //checks what user we are playing as
+  console.log(req.body.user);
   if(req.session.user != undefined) {
-
+    console.log(req.body);
+  } else {
+    console.log("User not logged in!");
   }
-  res.send(200);
+  res.sendStatus(200);
 }
 
 function createGame(req, res) {
@@ -26,9 +29,12 @@ function createGame(req, res) {
 
   game.startGame();
   var playerCards = game.getPlayerCards();
-  console.log(playerCards);
+
+  req.session.gameId = tables[tables.length - 1];
   res.json(playerCards);
 }
+
+
 
 module.exports = {
     create: createGame,
