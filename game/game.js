@@ -297,13 +297,12 @@ Game.prototype.checkFlush = function(playerHand) {
 
 }
 
-Game.prototype.checkFour = function(playerHand){
+Game.prototype.checkMultiple = function(playerHand, num){  //applies for fours, three of a kind and doubles
 
   var cardsToCheck = playerHand.concat(this.tableCards);
 
   cardsToCheck.sort(this.sortNumber);
 
-  var fourCheck = [];
 
 /* [ { suit: 'club', value: 2 },
   { suit: 'club', value: 10 },
@@ -331,7 +330,7 @@ Game.prototype.checkFour = function(playerHand){
 	console.log(values);
 
 	for (var i = 0; i < values.length; i++) {
-		if (values[i] == 4) {
+		if (values[i] == num) {
 			var key = Object.keys(counts).filter(function(key) {return counts[key] === values[i]})[0];
 			console.log(key)
 			return key ;
@@ -339,5 +338,10 @@ Game.prototype.checkFour = function(playerHand){
 	}
 	return false;
 }
+
+
+
+
+
 
 module.exports = Game;
