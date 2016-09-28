@@ -174,7 +174,7 @@ describe('Game', function() {
         ];
 
         // returns true because we have four of a kind
-        var fourOfAKindCheck = game.checkFour(playerHand);
+        var fourOfAKindCheck = game.checkMultiple(playerHand, 4);
 
         //pass condition
         expect(fourOfAKindCheck).to.equal('10');
@@ -205,8 +205,6 @@ describe('Game', function() {
       done();
     });
 
-
-
     it('should check for a flush', function(done) {
         var players = []
         for (var i = 0; i < 5; i++){
@@ -234,4 +232,28 @@ describe('Game', function() {
         expect(suits).to.equal(true);
         done()
     });
+
+    it('should check for a straight', function(done) {
+        var game = new Game();
+
+        var playerHand = [
+            { suit: 'club', value: 2 },
+            { suit: 'spade', value: 3 }
+        ];
+
+      // Four-of-a-kind using two hand cards and two table cards
+        game.tableCards = [
+            { suit: 'heart', value: 5 },
+            { suit: 'diamond', value: 7 },
+            { suit: 'club', value: 6 },
+            { suit: 'spade', value: 8 },
+            { suit: 'heart', value: 9 }
+        ];
+
+        var straight = game.straight(playerHand);
+
+        //pas condition
+        expect(straight).to.equal(9);
+        done();
+    })
 });

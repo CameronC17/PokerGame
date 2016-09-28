@@ -385,18 +385,21 @@ Game.prototype.straight = function(playerHand){
   var cardsToCheck = playerHand.concat(this.tableCards);
 
   cardsToCheck.sort(this.sortNumber);
-	console.log(cardsToCheck[0].value);
+	console.log("straight cards to check", cardsToCheck);
   var straightCheck = [];
 
   for (var i = 0; i < cardsToCheck.length - 1; i++) {
-    if ((cardsToCheck[i].value - cardsToCheck[i+1].value) == -1 && straightCheck.length <= 5){
+    if ((cardsToCheck[i].value - cardsToCheck[i+1].value) == -1){
       straightCheck.push(cardsToCheck[i].value);
-    } else {
+    } else if(straightCheck.length != 4) {
       straightCheck = [];
     }
   }
+
+	console.log(straightCheck);
+
   if (straightCheck.length == 4) {
-    return straightCheck;
+    return straightCheck[straightCheck.length - 1] + 1;
   }
   return false;
 }
