@@ -26,7 +26,8 @@ function createGame(req, res) {
 
   game.startGame();
   var playerCards = game.getPlayerCards();
-  console.log(playerCards);
+
+  req.session.gameId = tables[tables.length - 1];
   res.json(playerCards);
 }
 

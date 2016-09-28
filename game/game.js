@@ -297,5 +297,4 @@ Game.prototype.checkFlush = function(playerHand) {
 
 }
 
-
 module.exports = Game;
