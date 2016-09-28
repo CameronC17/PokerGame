@@ -308,6 +308,16 @@ describe('Game', function() {
     });
 
     it('should check the players hand', function(done) {
-        
+        var game = new Game();
+
+        var players = []
+        for (var i = 0; i < 5; i++){
+            players.push(new Player());
+        }
+
+        var playerHand = [
+            { suit: 'club', value: 2 },
+            { suit: 'spade', value: 3 }
+      ];
     })
 });

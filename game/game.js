@@ -314,7 +314,7 @@ Game.prototype.checkStraightFlush = function(playerHand){
 }
 
 Game.prototype.checkFlush = function(playerHand) {
-	var playerHand.sort(sortNumber);
+	playerHand.sort(sortNumber);
 	var suits = [[], [], [], []];
 	for (var i = 0; i < 2; i++) {
 		switch (playerHand[i].suit) {
