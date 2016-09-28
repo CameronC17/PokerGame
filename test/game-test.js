@@ -282,4 +282,28 @@ describe('Game', function() {
         expect(straight).to.equal(9);
         done();
     })
+
+    it('should return the players highest card', function(done){
+
+      var game = new Game();
+
+      var playerHand = [
+          { suit: 'club', value: 2 },
+          { suit: 'spade', value: 3 }
+      ];
+
+    // Four-of-a-kind using two hand cards and two table cards
+      game.tableCards = [
+          { suit: 'heart', value: 5 },
+          { suit: 'diamond', value: 7 },
+          { suit: 'club', value: 11 },
+          { suit: 'spade', value: 8 },
+          { suit: 'heart', value: 9 }
+      ];
+      var high = game.highCard(playerHand);
+
+      //pass condition
+      expect(high).to.equal(11);
+      done();
+    })
 });

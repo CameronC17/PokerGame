@@ -444,4 +444,15 @@ Game.prototype.checkTwoPairs = function(playerHand){
     return false;
 }
 
+Game.prototype.highCard = function(playerHand){
+
+  var cardsToCheck = playerHand.concat(this.tableCards);
+
+  cardsToCheck.sort(this.sortNumber);
+  var highCard = cardsToCheck[cardsToCheck.length - 1];
+
+  return highCard.value;
+
+}
+
 module.exports = Game;
