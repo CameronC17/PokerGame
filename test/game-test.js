@@ -173,8 +173,10 @@ describe('Game', function() {
             { suit: 'heart', value: 14 }
         ];
 
+        var cardsToCheck = playerHand.concat(game.tableCards);
+
         // returns true because we have four of a kind
-        var fourOfAKindCheck = game.checkMultiple(playerHand, 4);
+        var fourOfAKindCheck = game.checkMultiple(cardsToCheck, 4);
 
         //pass condition
         expect(fourOfAKindCheck).to.equal('10');
