@@ -20,7 +20,7 @@ Player.prototype.getHand = function(){
 }
 
 Player.prototype.setHandValue = function(index, highCard){
-  this.handValue[9] = 14;
+  this.handValue[index] = highCard;
 }
 
 module.exports = Player;

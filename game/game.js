@@ -100,63 +100,63 @@ Game.prototype.checkHand = function(player) {
 	var check = false;
 	var cardsToCheck = playerHand.concat(this.tableCards);
 
-	check = checkRoyalFlush(playerHand);
+	check = this.checkRoyalFlush(playerHand);
   if (!!check){
 		player.setHandValue(9, check);
 		return true;
   }
-	check = checkStraightFlush(playerHand);
+	check = this.checkStraightFlush(playerHand);
   if (!!check){
 		player.setHandValue(8, check);
 		return true;
   }
 
 	// Four of a kind
-	check = checkMultiple(cardsToCheck, 4);
+	check = this.checkMultiple(cardsToCheck, 4);
   if (!!check){
 		player.setHandValue(7, check);
 		return true;
   }
 
-	check = checkFullHouse(playerHand);
+	check = this.checkFullHouse(playerHand);
   if (!!check){
 		player.setHandValue(6, check);
 		return true;
   }
 
-	check = checkFlush(playerHand);
+	check = this.checkFlush(playerHand);
   if (!!check){
 		player.setHandValue(5, check);
 		return true;
   }
 
-	check = straight(playerHand);
+	check = this.straight(playerHand);
   if (!!check){
 		player.setHandValue(4, check);
 		return true;
   }
 
 	// Three of a kind
-	check = checkMultiple(cardsToCheck, 3);
+	check = this.checkMultiple(cardsToCheck, 3);
   if (!!check){
 		player.setHandValue(3, check);
 		return true;
   }
 
-	check = checkTwoPairs(playerHand);
+	check = this.checkTwoPairs(playerHand);
   if (!!check){
 		player.setHandValue(2, check);
 		return true;
   }
 
 	// Check Pair
-	check = checkMultiple(cardsToCheck, 2);
+	check = this.checkMultiple(cardsToCheck, 2);
   if (!!check){
 		player.setHandValue(1, check);
 		return true;
   }
 
-	check = highCard(playerHand);
+	check = this.highCard(playerHand);
   if (!!check){
 		player.setHandValue(0, check);
 		return true;
@@ -241,19 +241,20 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
 		}
 
 		if (checkStraight[0] == true && checkStraight[1] == true && checkStraight[2] == true && checkStraight[3] == true && checkStraight[4] == true) {
-			console.log("yes");
+			console.log("ROYAL FLUSH: ",cardsToCheck, playerHand);
       return 14;
 		} else {
-			console.log("no");
       return false;
 		}
 	} else {
-		console.log("no");
     return false;
   }
 }
 
 Game.prototype.checkStraightFlush = function(playerHand){
+	console.log("straight flush");
+	console.log(playerHand);
+	console.log(this.tableCards);
   var suits = [[], [], [], []];
   //checks player hand
   for (var i = 0; i < 2; i++) {
@@ -299,22 +300,24 @@ Game.prototype.checkStraightFlush = function(playerHand){
 	}
 
   cardsToCheck.sort(this.sortNumber);
-	console.log(cardsToCheck[0].value);
   var straightCheck = [];
 
   for (var i = 0; i < cardsToCheck.length - 1; i++) {
-    if ((cardsToCheck[i].value - cardsToCheck[i+1].value) == -1 && straightCheck.length <= 5){
-      straightCheck.push(1);
-    } else {
+    if ((cardsToCheck[i].value - cardsToCheck[i+1].value) == -1){
+      straightCheck.push(cardsToCheck[i].value);
+    } else if(straightCheck.length != 4) {
       straightCheck = [];
-    }
+		}
   }
 
-	return straightCheck[straightCheck.length - 1] + 1;
+	console.log(straightCheck);
+	console.log(straightCheck[straightCheck.length - 1] + 1);
+	return (straightCheck[straightCheck.length - 1] + 1);
+
 }
 
 Game.prototype.checkFlush = function(playerHand) {
-	playerHand.sort(sortNumber);
+	playerHand.sort(this.sortNumber);
 	var suits = [[], [], [], []];
 	for (var i = 0; i < 2; i++) {
 		switch (playerHand[i].suit) {
@@ -353,7 +356,7 @@ Game.prototype.checkFlush = function(playerHand) {
 
 	for (var i = 0; i < 4; i++) {
 		if (suits[i].length >= 5)
-			return suits[suits.length - 1];
+			return suits[i][suits[i].length - 1].value;
 	}
   return false;
 
@@ -398,8 +401,6 @@ Game.prototype.checkFullHouse = function(playerHand){
   cardsToCheck.sort(this.sortNumber);
 
   var firstRemove = this.checkMultiple(cardsToCheck, 3);
-  console.log('remove',remove);
-
 
   if (firstRemove != false){
     for(var i = 0; i < cardsToCheck.length; i++) {
@@ -408,8 +409,6 @@ Game.prototype.checkFullHouse = function(playerHand){
           i--;
     	}
   	}
-
-  	console.log('cards left',cardsToCheck);
 
   	var secondRemove = this.checkMultiple(cardsToCheck, 2);
 
@@ -420,14 +419,8 @@ Game.prototype.checkFullHouse = function(playerHand){
     	}
   	}
 
-  	console.log('cards left', cardsToCheck);
-
   	if (cardsToCheck.length <= 2){
-    	  if (firstRemove > secondRemove) {
-					return firstRemove;
-				} else {
-					return secondRemove;
-				}
+			return firstRemove;
   	}
 	}
 
