@@ -7,6 +7,8 @@ var playerPool = [];
 
 function joinPool(req, res) {
   if(req.body.user != undefined) {
+    //in here we can check if we are going to do singl=e player or multiplayer
+    //if (req.body.gameMode == "multi") etc etc etc
     getUserCredentials(req.body.user, addUserToPool, req, res);
   } else {
     res.send(403);
@@ -33,23 +35,8 @@ function addUserToPool(userinfo, req, res) {
 }
 
 function controlGame(req, res) {
-  //checks what user we are playing as
-  console.log(req.body.user);
-  if(req.body.user != undefined) {
-    var userInfo = getUserCredentials(req.body.user);
-    //console.log(userInfo);
-    if (userInfo) {
-      //console.log(userInfo);
-      res.sendStatus(200);
-    } else {
-      console.log("There's no user with those credentials!!!!!!!!");
-      res.sendStatus(403);
-    }
-  } else {
-    console.log("User not logged in!");
-    res.sendStatus(403);
-  }
-
+  console.log(req.body);
+  //res.send(200);
 }
 
 function getUserCredentials(userID, callback, req, res){
