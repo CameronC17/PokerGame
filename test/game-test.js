@@ -69,33 +69,26 @@ describe('Deck', function() {
         done();
     });
 
-    it('should ensure that the deck is shuffled. this test will not always pass!!!!! dont worry', function(done) {
+    // This has a chance of failing 1 in 80,658,175,170,943,878,571,660,636,856,403,766,975,289,505,440,883,277,824,000,000,000,000
+    it('should ensure that the deck is shuffled', function(done) {
         var deck = new Deck();
         deck.deck = deck.createDeck();
 
         var shuffleDeck = new Deck();
 
-        var passed = true;
+        var passed = false;
 
-        // check original deck position 1 DOES NOT equal shuffle deck position 1
-        // AND
-        // check original deck position 2 DOES NOT equal shuffle deck position 2
-        // AND
-        // check original deck position 52 DOES NOT equal shuffle deck position 52
-        // this may still fail though the chance of this happening is:
-        // 1 in 80,658,175,170,943,878,571,660,636,856,403,766,975,289,505,440,883,277,824,000,000,000,000
+        if (JSON.stringify(deck.deck) === JSON.stringify(shuffleDeck.deck))
+          passed = true;
+        else
+          passed = false;
 
-        for (var i = 0; i < 52; i++) {
-            if (deck.deck[i].suit == shuffleDeck.deck[i].suit)
-                passed = !passed;
-            if (deck.deck[i].value == shuffleDeck.deck[i].value)
-                passed = !passed;
-        }
-
-        expect(passed).to.equal(true);
+        expect(passed).to.equal(false);
 
         done();
     });
+
+
 });
 
 describe('Game', function() {
@@ -145,7 +138,7 @@ describe('Game', function() {
             { suit: 'club', value: 14 },
             { suit: 'spade', value: 1 }
             ];
-        
+
         // Straight flush using table cards
         game.tableCards = [
             { suit: 'heart', value: 3 },
@@ -163,7 +156,6 @@ describe('Game', function() {
         done();
 
 
-        
+
     });
 });
-
