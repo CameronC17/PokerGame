@@ -5,6 +5,7 @@ function Player(username, id, wallet, hand, handValue){
   // this.stake = 0
   this.hand = [];
   this.handValue = [null, null, null, null, null, null, null, null, null, null];
+  this.command = null;
 }
 
 Player.prototype.getID = function() {

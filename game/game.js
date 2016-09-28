@@ -49,18 +49,21 @@ Game.prototype.checkPlayerOnTable = function(playerID){
 }
 
 Game.prototype.actionBet = function (seatPosition, betAmount) {
-  console.log(seatPosition, betAmount);
-  //players[seatPosition].setBetAmount
+  // console.log(seatPosition, betAmount);
+  players[seatPosition].command(betAmount);
 };
 
 Game.prototype.actionCall = function (seatPosition) {
-  console.log(seatPosition + ' call');
+  // console.log(seatPosition + ' call');
+  players[seatPosition].command('call');
 };
 Game.prototype.actionFold = function (seatPosition) {
-  console.log(seatPosition + ' fold');
+  // console.log(seatPosition + ' fold');
+  players[seatPosition].command('fold');
 };
 Game.prototype.actionCheck = function (seatPosition) {
-  console.log(seatPosition + ' check');
+  // console.log(seatPosition + ' check');
+  players[seatPosition].command('check');
 };
 
 
