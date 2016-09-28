@@ -404,4 +404,47 @@ Game.prototype.straight = function(playerHand){
   return false;
 }
 
+Game.prototype.checkTwoPairs = function(playerHand){
+
+  var cardsToCheck = playerHand.concat(this.tableCards);
+
+  cardsToCheck.sort(this.sortNumber);
+
+  var remove = this.checkMultiple(playerHand, 2);
+  console.log('remove',remove);
+
+
+  if (remove != false){
+    for(var i = 0; i < cardsToCheck.length; i++) {
+      if(cardsToCheck[i].value == remove) {
+          cardsToCheck.splice(i, 1);
+          i--;
+
+      }
+    }
+
+    console.log('two pairs cards left',cardsToCheck);
+
+    remove = this.checkMultiple(cardsToCheck, 2);
+
+    console.log('remove 2 pairs',remove);
+
+    for(var i = 0; i < cardsToCheck.length; i++) {
+      if(cardsToCheck[i].value == remove) {
+          cardsToCheck.splice(i, 1);
+          i--;
+
+      }
+    }
+
+    console.log('cards left', cardsToCheck);
+
+    if (cardsToCheck.length <= 3){
+      return true;
+    }
+  }
+
+    return false;
+}
+
 module.exports = Game;

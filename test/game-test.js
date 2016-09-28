@@ -205,6 +205,30 @@ describe('Game', function() {
       done();
     });
 
+    it('should check for two pairs', function(done) {
+      var game = new Game();
+
+      var playerHand = [
+          { suit: 'club', value: 11 },
+          { suit: 'spade', value: 10 }
+          ];
+
+      // Four-of-a-kind using two hand cards and two table cards
+      game.tableCards = [
+          { suit: 'heart', value: 10 },
+          { suit: 'diamond', value: 9 },
+          { suit: 'club', value: 2 },
+          { suit: 'spade', value: 11 },
+          { suit: 'heart', value: 14 }
+      ];
+
+      var twoPairsCheck = game.checkTwoPairs(playerHand);
+
+      //pass condition
+      expect(twoPairsCheck).to.equal(true);
+      done();
+    });
+
     it('should check for a flush', function(done) {
         var players = []
         for (var i = 0; i < 5; i++){
