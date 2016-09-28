@@ -7,15 +7,29 @@ var playerPool = [];
 
 function joinPool(req, res) {
   if(req.body.user != undefined) {
-    getUserCredentials(req.body.user, addUserToPool, res);
+    getUserCredentials(req.body.user, addUserToPool, req, res);
   } else {
     res.send(403);
   }
 }
+//function Player(username, id, wallet, hand, handValue){
 
-function addUserToPool(userinfo, res) {
-  console.log(userinfo);
-  res.send(200);
+function addUserToPool(userinfo, req, res) {
+  playerPool.push(userinfo);
+  //here we can tell the user to wait for a game
+  //but for now were gonna start a game, this is all fake data
+
+  var players = [new Player(playerPool[0].username, playerPool[0].id, 10000, null, null), new Player(),  new Player(), new Player(), new Player()];
+
+  tables.push(new Game(players));
+
+  var game = tables[tables.length - 1];
+
+  game.startGame();
+  var playerCards = game.getPlayerCards();
+
+  req.session.gameId = tables[tables.length - 1];
+  res.json(playerCards);
 }
 
 function controlGame(req, res) {
@@ -38,11 +52,11 @@ function controlGame(req, res) {
 
 }
 
-function getUserCredentials(userID, callback, res){
+function getUserCredentials(userID, callback, req, res){
   User.findOne({ _id: userID }, function(err, user) {
     if (user) {
         // Sets the session user id to equal the logged in user id.
-        callback(user, res);
+        callback(user, req, res);
     } else {
         if (err) {
             console.log(err.message);
