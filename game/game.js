@@ -252,6 +252,50 @@ Game.prototype.checkStraightFlush = function(playerHand){
 	return straightCheck;
 }
 
+Game.prototype.checkFlush = function(playerHand) {
+	var suits = [[], [], [], []];
+	for (var i = 0; i < 2; i++) {
+		switch (playerHand[i].suit) {
+			case "heart":
+				suits[0].push(playerHand[i]);
+				break;
+			case "diamond":
+				suits[1].push(playerHand[i]);
+				break;
+			case "spade":
+				suits[2].push(playerHand[i]);
+				break;
+			case "club":
+				suits[3].push(playerHand[i]);
+				break;
+		}
+	}
+
+	//checks table cards
+	for (var i = 0; i < 5; i++) {
+		switch (this.tableCards[i].suit) {
+			case "heart":
+				suits[0].push(this.tableCards[i]);
+				break;
+			case "diamond":
+				suits[1].push(this.tableCards[i]);
+				break;
+			case "spade":
+				suits[2].push(this.tableCards[i]);
+				break;
+			case "club":
+				suits[3].push(this.tableCards[i]);
+				break;
+		}
+	}
+
+	for (var i = 0; i < 4; i++) {
+		if (suits[i].length >= 5)
+			return suits[i];
+	}
+
+
+}
 
 
 module.exports = Game;
