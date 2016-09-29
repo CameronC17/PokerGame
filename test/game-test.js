@@ -101,7 +101,7 @@ describe('Game', function() {
 
         var game = new Game(players);
 
-        game.dealPlayerCards();
+        //game.dealPlayerCards();
 
         expect(players[0].getHand()).to.have.length(2);
         expect(players[1].getHand()).to.have.length(2);
@@ -130,7 +130,7 @@ describe('Game', function() {
 
 
     it('should check for a straight flush', function(done) {
-        var game = new Game();
+
 
         var players = []
         for (var i = 0; i < 5; i++){
@@ -143,7 +143,9 @@ describe('Game', function() {
             { suit: 'spade', value: 10 }
             ];
 
-        players[0].hand = playerHand;
+        var game = new Game(players);
+
+        game.players[0].hand = playerHand;
 
         // Straight flush using table cards
         game.tableCards = [
@@ -154,16 +156,15 @@ describe('Game', function() {
             { suit: 'heart', value: 4 }
         ];
 
-        var straightCheck = game.checkHand(players[0]);
+        var straightCheck = game.checkHand(game.players[0]);
 
         // console.log("STRAIGHT FLUSH: ", players[0].handValue);
-        expect(players[0].handValue[8]).to.equal(7);
+        expect(game.players[0].handValue[8]).to.equal(7);
 
         done();
     });
 
     it('should check for a four-of-a-kind', function(done) {
-        var game = new Game();
 
         var players = []
         for (var i = 0; i < 5; i++){
@@ -175,7 +176,9 @@ describe('Game', function() {
             { suit: 'spade', value: 10 }
             ];
 
-        players[0].hand = playerHand;
+        var game = new Game(players);
+
+        game.players[0].hand = playerHand;
 
         // Four-of-a-kind using two hand cards and two table cards
         game.tableCards = [
@@ -186,16 +189,14 @@ describe('Game', function() {
             { suit: 'heart', value: 14 }
         ];
 
-        var fourCheck = game.checkHand(players[0]);
+        var fourCheck = game.checkHand(game.players[0]);
 
         //pass condition
-        expect(players[0].handValue[7]).to.equal('10');
+        expect(game.players[0].handValue[7]).to.equal('10');
         done();
     });
 
     it('should check for a full house', function(done) {
-      var game = new Game();
-
       var players = []
       for (var i = 0; i < 5; i++){
         players.push(new Player());
@@ -206,6 +207,10 @@ describe('Game', function() {
           { suit: 'spade', value: 10 }
           ];
 
+      var game = new Game(players);
+
+      game.players[0].hand = playerHand;
+
       // Four-of-a-kind using two hand cards and two table cards
       game.tableCards = [
           { suit: 'heart', value: 10 },
@@ -215,19 +220,14 @@ describe('Game', function() {
           { suit: 'heart', value: 14 }
       ];
 
-      players[0].hand = playerHand;
 
-
-      var fullHouseCheck = game.checkHand(players[0]);
-
+      var fullHouseCheck = game.checkHand(game.players[0]);
       //pas condition
-      expect(players[0].handValue[6]).to.equal('10');
+      expect(game.players[0].handValue[6]).to.equal('10');
       done();
     });
 
     it('should check for two pairs', function(done) {
-      var game = new Game();
-
       var players = []
       for (var i = 0; i < 5; i++){
         players.push(new Player());
@@ -238,7 +238,9 @@ describe('Game', function() {
           { suit: 'spade', value: 10 }
           ];
 
-      players[0].hand = playerHand;
+      var game = new Game(players);
+
+      game.players[0].hand = playerHand;
 
       // Four-of-a-kind using two hand cards and two table cards
       game.tableCards = [
@@ -249,10 +251,10 @@ describe('Game', function() {
           { suit: 'heart', value: 14 }
       ];
 
-      var twoPairsCheck = game.checkHand(players[0]);
+      var twoPairsCheck = game.checkHand(game.players[0]);
 
       //pass condition
-      expect(players[0].handValue[2]).to.equal('11');
+      expect(game.players[0].handValue[2]).to.equal('11');
       done();
     });
 
@@ -263,15 +265,15 @@ describe('Game', function() {
             players.push(new Player());
         }
 
-        var game = new Game(players);
-
 
         var playerHand = [
             { suit: 'spade', value: 5 },
             { suit: 'spade', value: 3 }
         ];
 
-        players[0].hand = playerHand;
+        var game = new Game(players);
+
+        game.players[0].hand = playerHand;
 
         game.tableCards = [
             { suit: 'spade', value: 7 },
@@ -281,16 +283,13 @@ describe('Game', function() {
             { suit: 'heart', value: 3 }
         ];
 
-        var suits = game.checkHand(players[0]);
+        var suits = game.checkHand(game.players[0]);
 
-        // console.log(players[0].handValue);
-
-        expect(players[0].handValue[5]).to.equal(10);
+        expect(game.players[0].handValue[5]).to.equal(10);
         done();
     });
 
     it('should check for a straight', function(done) {
-        var game = new Game();
 
         var players = []
         for (var i = 0; i < 5; i++){
@@ -302,7 +301,9 @@ describe('Game', function() {
             { suit: 'spade', value: 3 }
         ];
 
-        players[0].hand = playerHand;
+        var game = new Game(players);
+
+        game.players[0].hand = playerHand;
 
       // Four-of-a-kind using two hand cards and two table cards
         game.tableCards = [
@@ -313,16 +314,14 @@ describe('Game', function() {
             { suit: 'heart', value: 9 }
         ];
 
-        var straight = game.checkHand(players[0]);
+        var straight = game.checkHand(game.players[0]);
 
         //pas condition
-        expect(players[0].handValue[4]).to.equal(9);
+        expect(game.players[0].handValue[4]).to.equal(9);
         done();
     })
 
     it('should return the players highest card', function(done){
-
-      var game = new Game();
 
       var players = []
       for (var i = 0; i < 5; i++){
@@ -334,7 +333,9 @@ describe('Game', function() {
           { suit: 'spade', value: 3 }
       ];
 
-      players[0].hand = playerHand;
+      var game = new Game(players);
+
+      game.players[0].hand = playerHand;
 
     // Four-of-a-kind using two hand cards and two table cards
       game.tableCards = [
@@ -344,20 +345,26 @@ describe('Game', function() {
           { suit: 'spade', value: 8 },
           { suit: 'heart', value: 9 }
       ];
-      var high = game.checkHand(players[0]);
+      var high = game.checkHand(game.players[0]);
 
       //pass condition
-      expect(players[0].handValue[0]).to.equal(11);
+      expect(game.players[0].handValue[0]).to.equal(11);
       done();
     });
 
     it('should check the players hand', function(done) {
-        var game = new Game();
 
         var players = []
         for (var i = 0; i < 5; i++){
             players.push(new Player());
         }
+
+        var playerHand = [
+            { suit: 'club', value: 2 },
+            { suit: 'spade', value: 3 }
+        ];
+
+        var game = new Game(players);
 
         game.tableCards = [
             { suit: 'heart', value: 10 },
@@ -367,16 +374,12 @@ describe('Game', function() {
             { suit: 'heart', value: 14 }
         ];
 
-        var playerHand = [
-            { suit: 'club', value: 2 },
-            { suit: 'spade', value: 3 }
-        ];
 
-        players[0].hand = playerHand;
+        game.players[0].hand = playerHand;
 
-        game.checkHand(players[0]);
+        game.checkHand(game.players[0]);
 
-        expect(players[0].handValue[9]).to.equal(14);
+        expect(game.players[0].handValue[9]).to.equal(14);
 
         // console.log(players[0].handValue);
 

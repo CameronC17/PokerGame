@@ -23,6 +23,7 @@ function addUserToPool(userinfo, req, res) {
 
   var players = [new Player(playerPool[0].username, playerPool[0].id, 10000, null, null), new Player(),  new Player(), new Player(), new Player()];
 
+//, new Player(),  new Player(), new Player(), new Player()
   tables.push(new Game(players));
 
   var game = tables[tables.length - 1];
@@ -68,7 +69,7 @@ function performCommand(gameID, req, res){
   }else if(req.body.fold == 'true'){
     tables[gameID[0]].actionFold(gameID[1]);
   }
-  res.sendStatus(200);
+  res.json(tables[gameID[0]].getTableCards());
 }
 
 function getUserCredentials(userID, callback, req, res){
