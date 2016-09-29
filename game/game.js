@@ -229,7 +229,6 @@ Game.prototype.checkWinners = function() {
     }
   }
 
-}
 
 
 Game.prototype.checkHand = function(player) {
@@ -332,7 +331,6 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
         }
     }
 
-<<<<<<< HEAD
 	//checks table cards
 	for (var i = 0; i < this.tableCards.length; i++) {
 		switch (this.tableCards[i].suit) {
@@ -350,7 +348,7 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
 				break;
 		}
 	}
-=======
+
     //checks table cards
     for (var i = 0; i < 5; i++) {
         switch (this.tableCards[i].suit) {
@@ -368,7 +366,6 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
                 break;
         }
     }
->>>>>>> actions
 
     var cardsToCheck = null;
 
@@ -402,7 +399,6 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
             }
         }
 
-<<<<<<< HEAD
 		if (checkStraight[0] == true && checkStraight[1] == true && checkStraight[2] == true && checkStraight[3] == true && checkStraight[4] == true) {
       return 14;
 		} else {
@@ -411,7 +407,6 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
 	} else {
     return false;
   }
-=======
         if (checkStraight[0] == true && checkStraight[1] == true && checkStraight[2] == true && checkStraight[3] == true && checkStraight[4] == true) {
             console.log("ROYAL FLUSH: ", cardsToCheck, playerHand);
             return 14;
@@ -421,7 +416,6 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
     } else {
         return false;
     }
->>>>>>> actions
 }
 
 Game.prototype.checkStraightFlush = function(playerHand) {
@@ -537,13 +531,13 @@ Game.prototype.checkFlush = function(playerHand) {
         }
     }
 
-<<<<<<< HEAD
+
 	for (var i = 0; i < 4; i++) {
 		if (suits[i].length >= 5)
 			return suits[i][suits[i].length - 1].value;
 	}
   return false;
-=======
+
     console.log("FLUSH: ", suits);
 
     for (var i = 0; i < 4; i++) {
@@ -551,18 +545,18 @@ Game.prototype.checkFlush = function(playerHand) {
             return suits[i][suits[i].length - 1].value;
     }
     return false;
->>>>>>> actions
+
 
 }
 
 Game.prototype.checkMultiple = function(cardsToCheck, num) { //applies for fours, three of a kind and doubles
 
-<<<<<<< HEAD
+
   cardsToCheck.sort(this.sortNumber);
-=======
+
     cardsToCheck.sort(this.sortNumber);
     console.log(cardsToCheck);
->>>>>>> actions
+
 
     var counts = {},
         i, value;
