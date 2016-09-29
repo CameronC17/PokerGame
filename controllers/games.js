@@ -21,7 +21,7 @@ function addUserToPool(userinfo, req, res) {
   //here we can tell the user to wait for a game
   //but for now were gonna start a game, this is all fake data
 
-  var players = [new Player(playerPool[0].username, playerPool[0].id, 10000, null, null)];
+  var players = [new Player(playerPool[0].username, playerPool[0].id, 10000, null, null), new Player(),  new Player(), new Player(), new Player()];
 
 //, new Player(),  new Player(), new Player(), new Player()
   tables.push(new Game(players));
@@ -71,7 +71,7 @@ function performCommand(gameID, req, res){
   }else if(req.body.fold == 'true'){
     tables[gameID[0]].actionFold(gameID[1]);
   }
-  res.sendStatus(200);
+  res.json(tables[gameID[0]].getTableCards());
 }
 
 function getUserCredentials(userID, callback, req, res){

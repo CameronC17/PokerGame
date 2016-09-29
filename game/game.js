@@ -72,8 +72,10 @@ Game.prototype.actionCheck = function(seatPosition) {
     // console.log(seatPosition + ' check');
     if(seatPosition == this.turnCounter){
       console.log("Player " + seatPosition + " has just checked");
+      console.log("Now lets fake 4 more checks");
       this.players[seatPosition].command= 'check';
-      this.turnCounter++;
+      //this.turnCounter++;
+      this.turnCounter = 5;
       this.actionTime();
     }
 
@@ -84,13 +86,13 @@ Game.prototype.actionTime = function(seatNumber) {
   if(this.turnCounter >= this.players.length) {
       console.log("Betting has finished, moving on");
       this.turnCounter = null;
-      this.continueGame(gamePosition);
+      this.continueGame();
   }
 }
 
-Game.prototype.continueGame = function(gamePosition) {
-  console.log("Current game position: " + gamePosition);
-    switch (gamePosition) {
+Game.prototype.continueGame = function() {
+  console.log("Current game position: " + this.gamePosition);
+    switch (this.gamePosition) {
         case (0):
             this.dealPlayerCards();
             this.turnCounter= 0;
@@ -98,16 +100,18 @@ Game.prototype.continueGame = function(gamePosition) {
 
         case (1):
             // dealFlop
+            this.dealTableCards(3);
             this.turnCounter= 0;
             break;
 
         case (2):
-            // deal the turn
+            this.dealTableCards(1);
             this.turnCounter= 0;
             break;
 
         case (3):
             // dealRiver
+            this.dealTableCards(1);
             this.turnCounter= 0;
             break;
         case (4):
@@ -127,7 +131,6 @@ Game.prototype.dealPlayerCards = function() {
 
 Game.prototype.dealTableCards = function(num) {
     for (var i = 0; i < num; i++) {
-        console.log(this.deck.getLength());
         if (this.deck.getLength() > 5) {
             this.tableCards.push(this.deck.popFromDeck());
         }
@@ -146,7 +149,6 @@ Game.prototype.getPlayerCards = function() {
     for (var i = 0; i < this.players.length; i++) {
         playerCards.push(this.players[i].getHand());
     }
-    console.log(playerCards);
     return playerCards;
 }
 
@@ -159,7 +161,6 @@ Game.prototype.getPlayers = function() {
 }
 
 Game.prototype.checkWinners = function() {
-<<<<<<< HEAD
   for (var i = 0; i < players.length; i++) {
     //players[i].handValue = this.checkHand(players[i]);
     this.checkHand(players[i]);
@@ -177,12 +178,7 @@ Game.prototype.checkWinners = function() {
 			}
 		}
 	}
-=======
-    for (var i = 0; i < players.length; i++) {
-        //players[i].handValue = this.checkHand(players[i]);
-        this.checkHand(players[i]);
-    }
->>>>>>> aedfa64fb9e92d1736a8ffd9860c2f79a4a8f05a
+
 }
 
 Game.prototype.checkHand = function(player) {
