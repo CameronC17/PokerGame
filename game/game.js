@@ -76,8 +76,9 @@ Game.prototype.actionTime = function (seatNumber){
   if(seatNumber == this.turnCounter){
     // this is where the actions are going to be performed
     this.turnCounter ++;
-    if(this.turnCounter >= this.players.length){
+    if(this.turnCounter == this.players.length){
       this.turnCounter= null;
+      // this.nextTurn();
     }
   }
 }
