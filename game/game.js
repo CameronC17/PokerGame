@@ -331,6 +331,7 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
         }
     }
 
+
 	//checks table cards
 	for (var i = 0; i < this.tableCards.length; i++) {
 		switch (this.tableCards[i].suit) {
@@ -348,6 +349,7 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
 				break;
 		}
 	}
+
 
     //checks table cards
     for (var i = 0; i < 5; i++) {
@@ -407,6 +409,7 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
 	} else {
     return false;
   }
+
         if (checkStraight[0] == true && checkStraight[1] == true && checkStraight[2] == true && checkStraight[3] == true && checkStraight[4] == true) {
             console.log("ROYAL FLUSH: ", cardsToCheck, playerHand);
             return 14;
@@ -416,6 +419,7 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
     } else {
         return false;
     }
+
 }
 
 Game.prototype.checkStraightFlush = function(playerHand) {
@@ -538,6 +542,7 @@ Game.prototype.checkFlush = function(playerHand) {
 	}
   return false;
 
+
     console.log("FLUSH: ", suits);
 
     for (var i = 0; i < 4; i++) {
@@ -547,6 +552,7 @@ Game.prototype.checkFlush = function(playerHand) {
     return false;
 
 
+
 }
 
 Game.prototype.checkMultiple = function(cardsToCheck, num) { //applies for fours, three of a kind and doubles
@@ -554,8 +560,10 @@ Game.prototype.checkMultiple = function(cardsToCheck, num) { //applies for fours
 
   cardsToCheck.sort(this.sortNumber);
 
+
     cardsToCheck.sort(this.sortNumber);
     console.log(cardsToCheck);
+
 
 
     var counts = {},
