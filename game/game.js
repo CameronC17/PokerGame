@@ -55,6 +55,7 @@ Game.prototype.checkPlayerOnTable = function(playerID) {
 Game.prototype.actionBet = function(seatPosition, betAmount) {
     // console.log(seatPosition, betAmount);
     players[seatPosition].command(betAmount);
+    this.pot += betAmount;
     this.actionTime(seatPosition);
 };
 
@@ -80,6 +81,7 @@ Game.prototype.actionCheck = function(seatPosition) {
     }
 
 };
+
 
 
 Game.prototype.actionTime = function(seatNumber) {
