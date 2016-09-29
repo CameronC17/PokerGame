@@ -60,16 +60,22 @@ function findUserInTable(userID){
     return null;
 }
 function performCommand(gameID, req, res){
-  if(req.body.bet > 0){
-    tables[gameID[0]].actionBet(gameID[1], req.body.bet);
-  }else if(req.body.call == 'true'){
-    tables[gameID[0]].actionCall(gameID[1]);
-  }else if(req.body.check == 'true'){
-    tables[gameID[0]].actionCheck(gameID[1]);
-  }else if(req.body.fold == 'true'){
-    tables[gameID[0]].actionFold(gameID[1]);
-  }
+  if (tables[gameID[0]].players[gameID[1]].command == 'fold'){
+    res.sendStatus(400);
+  }else{
+    if(req.body.bet > 0){
+      tables[gameID[0]].actionBet(gameID[1], req.body.bet);
+    }else if(req.body.call == 'true'){
+      tables[gameID[0]].actionCall(gameID[1]);
+    }else if(req.body.check == 'true'){
+      tables[gameID[0]].actionCheck(gameID[1]);
+    }else if(req.body.fold == 'true'){
+      tables[gameID[0]].actionFold(gameID[1]);
+    }
   res.json(tables[gameID[0]].getTableCards());
+
+  }
+
 }
 
 function getUserCredentials(userID, callback, req, res){
@@ -176,7 +182,7 @@ function checkWinner(req, res) {
   for(var i = 0; i < players.length; i++) {
     handValues.push(players[i].handValue);
   }
-  
+
   var response = {
     winner: winner,
     handValues: handValues
