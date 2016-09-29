@@ -109,9 +109,28 @@ function createGame(req, res) {
   res.json(playerCards);
 }
 
+///TESTING STUFF///
+
+function testGame(req, res) {
+  console.log(req.params.id);
+  console.log(req.body.test);
+
+  if (tables[req.params.id] != undefined) {
+    switch (req.body.test) {
+      case "deck":
+        break;
+      default:
+        res.sendStatus(200).json
+    }
+  }
+
+  res.sendStatus(200);
+}
+
 
 
 module.exports = {
     join: joinPool,
-    control: controlGame
+    control: controlGame,
+    test: testGame
 }

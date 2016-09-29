@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+
 var usersController = require('../controllers/users');
 var sessionController = require('../controllers/sessions');
 var gamesController = require('../controllers/games');
@@ -25,5 +26,9 @@ router.route('/games')
 
 router.route('/games/new')
       .post(gamesController.join);
+
+// Test routes
+router.route('/games/:id/test')
+      .post(gamesController.test);
 
 module.exports = router;
