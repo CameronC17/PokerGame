@@ -21,8 +21,9 @@ function addUserToPool(userinfo, req, res) {
   //here we can tell the user to wait for a game
   //but for now were gonna start a game, this is all fake data
 
-  var players = [new Player(playerPool[0].username, playerPool[0].id, 10000, null, null), new Player(),  new Player(), new Player(), new Player()];
+  var players = [new Player(playerPool[0].username, playerPool[0].id, 10000, null, null)];
 
+//, new Player(),  new Player(), new Player(), new Player()
   tables.push(new Game(players));
 
   var game = tables[tables.length - 1];
