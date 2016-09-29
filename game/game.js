@@ -59,7 +59,8 @@ Game.prototype.actionBet = function(seatPosition, betAmount) {
       this.lastBet = betAmount;
       this.players[seatPosition].command = betAmount;
       this.pot += parseInt(betAmount);
-      this.turnCounter++;
+      // this.turnCounter++;
+      this.turnCounter = 5;
       this.actionTime(seatPosition);
   };
 };
@@ -68,7 +69,8 @@ Game.prototype.actionCall = function(seatPosition) {
     console.log(seatPosition + ' call');
     if(seatPosition == this.turnCounter){
       this.players[seatPosition].command = this.lastBet;
-      this.turnCounter++;
+      // this.turnCounter++;
+      this.turnCounter = 5;
       this.actionTime(seatPosition);
   };
 };
@@ -77,7 +79,8 @@ Game.prototype.actionFold = function(seatPosition) {
     if(seatPosition == this.turnCounter){
       this.players[seatPosition].command = 'fold';
       this.players.hand = null;
-      this.turnCounter++;
+      // this.turnCounter++;
+      this.turnCounter = 5;
       this.actionTime(seatPosition);
   };
 };
@@ -87,8 +90,8 @@ Game.prototype.actionCheck = function(seatPosition) {
       console.log("Player " + seatPosition + " has just checked");
       console.log("Now lets fake 4 more checks");
       this.players[seatPosition].command= 'check';
-      this.turnCounter++;
-      // this.turnCounter = 5;
+      // this.turnCounter++;
+      this.turnCounter = 5;
       this.actionTime(seatPosition);
     };
 
@@ -131,6 +134,7 @@ Game.prototype.continueGame = function() {
         case (2):
             this.dealTableCards(1);
             this.turnCounter= 0;
+            this.resetCommands();
             break;
 
         case (3):
@@ -181,6 +185,17 @@ Game.prototype.getPlayerCards = function() {
 Game.prototype.getTableCards = function() {
     return this.tableCards;
 }
+
+Game.prototype.getTableChips = function() {
+    var playerBets = [null,null,null,null,null];
+    for (var i = 0; i < this.players.length; i ++){
+      if (typeof(playerBets[i] = this.players[i].commands) == 'number'){
+        playerBets[i] = this.players[i].commands;
+      }
+    }
+    return playerBets;
+}
+
 
 Game.prototype.getPlayers = function() {
     return this.players;
