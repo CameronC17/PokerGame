@@ -57,8 +57,6 @@ function findUserInTable(userID){
 
     }
     return null;
-
-
 }
 function performCommand(gameID, req, res){
   if(req.body.bet > 0){
@@ -109,22 +107,26 @@ function createGame(req, res) {
   res.json(playerCards);
 }
 
-///TESTING STUFF///
-
 function testGame(req, res) {
-  console.log(req.params.id);
-  console.log(req.body.test);
-
-  if (tables[req.params.id] != undefined) {
+  //console.log(req.params.id);
+  //console.log(req.body.test);
+  var tbNumber = req.params.id;
+  if (tbNumber >= 0 && tbNumber < tables.length) {
+    var jsonReturn = null;
     switch (req.body.test) {
       case "deck":
+        jsonReturn = tables[tbNumber].testDeck();
         break;
       default:
-        res.sendStatus(200).json
+        console.log("Test command not recognised");
+        break;
     }
-  }
 
-  res.sendStatus(200);
+    res.json(jsonReturn);
+  } else {
+    console.log("Test request unsuccessful - game doesn not exist");
+    res.sendStatus(404);
+  }
 }
 
 
