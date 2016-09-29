@@ -90,12 +90,12 @@ Game.prototype.actionCheck = function(seatPosition) {
       //this.turnCounter++;
       this.turnCounter = 5;
       this.actionTime();
-      this.checkFinished(seatPosition);
+      //this.checkFinished(seatPosition);
     }
 
 };
 
-Game.prototype.checkFinished = function(seatPosition) {
+/*Game.prototype.checkFinished = function(seatPosition) {
   var check = true;
 
   for (var i=0; i < this.players[seatPosition].length; i++){
@@ -110,7 +110,7 @@ Game.prototype.checkFinished = function(seatPosition) {
   if (check = true){
     return computer.think();
   };
-}
+}*/
 
 Game.prototype.checkAI = function(seatPosition){
 
