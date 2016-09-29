@@ -23,6 +23,7 @@ function Game(players) {
     this.turnCounter = null;
     this.gamePosition = 0;
     this.continueGame(this.gamePosition);
+    this.lastBet = null;
 }
 
 Game.prototype.startGame = function() {
@@ -50,25 +51,35 @@ Game.prototype.checkPlayerOnTable = function(playerID) {
         }
     }
     return false;
-}
+};
 
 Game.prototype.actionBet = function(seatPosition, betAmount) {
     // console.log(seatPosition, betAmount);
-    this.players[seatPosition].command = betAmount;
-    this.pot += betAmount;
-    console.log(this.pot);
-    this.actionTime(seatPosition);
+    if(seatPosition == this.turnCounter){
+      this.lastBet = betAmount;
+      this.players[seatPosition].command = betAmount;
+      this.pot += parseInt(betAmount);
+      this.turnCounter++;
+      this.actionTime(seatPosition);
+  };
 };
 
 Game.prototype.actionCall = function(seatPosition) {
-    // console.log(seatPosition + ' call');
-    players[seatPosition].command('call');
-    this.actionTime(seatPosition);
+    console.log(seatPosition + ' call');
+    if(seatPosition == this.turnCounter){
+      this.players[seatPosition].command = this.lastBet;
+      this.turnCounter++;
+      this.actionTime(seatPosition);
+  };
 };
 Game.prototype.actionFold = function(seatPosition) {
-    // console.log(seatPosition + ' fold');
-    players[seatPosition].command('fold');
-    this.actionTime(seatPosition);
+    console.log(seatPosition + ' fold');
+    if(seatPosition == this.turnCounter){
+      this.players[seatPosition].command = 'fold';
+      this.players.hand = null;
+      this.turnCounter++;
+      this.actionTime(seatPosition);
+  };
 };
 Game.prototype.actionCheck = function(seatPosition) {
     // console.log(seatPosition + ' check');
@@ -133,20 +144,30 @@ Game.prototype.actionTime = function(seatNumber) {
       this.turnCounter = null;
       this.continueGame();
   }
-}
+};
 
+Game.prototype.resetCommands = function () {
+  for( var i = 0; i < this.players.length ; i++){
+    if (this.players[i].command != 'fold'){
+      console.log('Resetting commands');
+      this.players[i].command = null;
+    }
+  }
+};
 Game.prototype.continueGame = function() {
   console.log("Current game position: " + this.gamePosition);
     switch (this.gamePosition) {
         case (0):
             this.dealPlayerCards();
             this.turnCounter= 0;
+            this.resetCommands();
             break;
 
         case (1):
             // dealFlop
             this.dealTableCards(3);
             this.turnCounter= 0;
+            this.resetCommands();
             break;
 
         case (2):
@@ -158,13 +179,15 @@ Game.prototype.continueGame = function() {
             // dealRiver
             this.dealTableCards(1);
             this.turnCounter= 0;
+            this.resetCommands();
             break;
         case (4):
             // decide winner
             break;
     }
     this.gamePosition++;
-};
+    this.lastBet = null;
+  };
 
 
 Game.prototype.dealPlayerCards = function() {
@@ -365,6 +388,25 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
     }
 
 
+	//checks table cards
+	for (var i = 0; i < this.tableCards.length; i++) {
+		switch (this.tableCards[i].suit) {
+			case "heart":
+				suits[0].push(this.tableCards[i]);
+				break;
+			case "diamond":
+				suits[1].push(this.tableCards[i]);
+				break;
+			case "spade":
+				suits[2].push(this.tableCards[i]);
+				break;
+			case "club":
+				suits[3].push(this.tableCards[i]);
+				break;
+		}
+	}
+
+
     //checks table cards
     for (var i = 0; i < 5; i++) {
         switch (this.tableCards[i].suit) {
@@ -547,12 +589,27 @@ Game.prototype.checkFlush = function(playerHand) {
   return false;
 
 
+    console.log("FLUSH: ", suits);
+
+    for (var i = 0; i < 4; i++) {
+        if (suits[i].length >= 5)
+            return suits[i][suits[i].length - 1].value;
+    }
+    return false;
+
+
+
 }
 
 Game.prototype.checkMultiple = function(cardsToCheck, num) { //applies for fours, three of a kind and doubles
 
 
   cardsToCheck.sort(this.sortNumber);
+
+
+    cardsToCheck.sort(this.sortNumber);
+    console.log(cardsToCheck);
+
 
 
     var counts = {},

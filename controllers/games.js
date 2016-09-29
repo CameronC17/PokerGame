@@ -60,16 +60,22 @@ function findUserInTable(userID){
     return null;
 }
 function performCommand(gameID, req, res){
-  if(req.body.bet > 0){
-    tables[gameID[0]].actionBet(gameID[1], req.body.bet);
-  }else if(req.body.call == 'true'){
-    tables[gameID[0]].actionCall(gameID[1]);
-  }else if(req.body.check == 'true'){
-    tables[gameID[0]].actionCheck(gameID[1]);
-  }else if(req.body.fold == 'true'){
-    tables[gameID[0]].actionFold(gameID[1]);
-  }
+  if (tables[gameID[0]].players[gameID[1]].command == 'fold'){
+    res.sendStatus(400);
+  }else{
+    if(req.body.bet > 0){
+      tables[gameID[0]].actionBet(gameID[1], req.body.bet);
+    }else if(req.body.call == 'true'){
+      tables[gameID[0]].actionCall(gameID[1]);
+    }else if(req.body.check == 'true'){
+      tables[gameID[0]].actionCheck(gameID[1]);
+    }else if(req.body.fold == 'true'){
+      tables[gameID[0]].actionFold(gameID[1]);
+    }
   res.json(tables[gameID[0]].getTableCards());
+
+  }
+
 }
 
 function getUserCredentials(userID, callback, req, res){
@@ -149,7 +155,6 @@ function testGame(req, res) {
   }
 */
 function checkWinner(req, res) {
-  console.log(req.body.playerHands);
   var playerHand0 = req.body.playerHands.player0;
   var playerHand1 = req.body.playerHands.player1;
   var playerHand2 = req.body.playerHands.player2;
@@ -161,13 +166,13 @@ function checkWinner(req, res) {
     players.push(new Player());
   };
 
-  players[0].setHand(playerHand0);
-  players[1].setHand(playerHand1);
-  players[2].setHand(playerHand2);
-  players[3].setHand(playerHand3);
-  players[4].setHand(playerHand4);
-
   var game = new Game(players);
+
+  game.players[0].setHand(playerHand0);
+  game.players[1].setHand(playerHand1);
+  game.players[2].setHand(playerHand2);
+  game.players[3].setHand(playerHand3);
+  game.players[4].setHand(playerHand4);
 
   game.tableCards = req.body.tableCards;
 
@@ -177,13 +182,13 @@ function checkWinner(req, res) {
   for(var i = 0; i < players.length; i++) {
     handValues.push(players[i].handValue);
   }
-  
+
   var response = {
     winner: winner,
     handValues: handValues
   }
 
-  res.json(response).sendStatus(200);
+  res.json(response);
 }
 
 
