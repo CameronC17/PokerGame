@@ -131,7 +131,7 @@ describe('Game', function() {
 
     it('should check for a straight flush', function(done) {
         var game = new Game();
-        
+
         var players = []
         for (var i = 0; i < 5; i++){
             players.push(new Player());
@@ -142,7 +142,7 @@ describe('Game', function() {
             { suit: 'club', value: 2 },
             { suit: 'spade', value: 10 }
             ];
-        
+
         players[0].hand = playerHand;
 
         // Straight flush using table cards
@@ -195,7 +195,7 @@ describe('Game', function() {
 
     it('should check for a full house', function(done) {
       var game = new Game();
-      
+
       var players = []
       for (var i = 0; i < 5; i++){
         players.push(new Player());
@@ -282,7 +282,7 @@ describe('Game', function() {
         ];
 
         var suits = game.checkHand(players[0]);
-        
+
         console.log(players[0].handValue);
 
         expect(players[0].handValue[5]).to.equal(10);
@@ -335,7 +335,7 @@ describe('Game', function() {
       ];
 
       players[0].hand = playerHand;
-      
+
     // Four-of-a-kind using two hand cards and two table cards
       game.tableCards = [
           { suit: 'heart', value: 5 },
@@ -377,6 +377,11 @@ describe('Game', function() {
         game.checkHand(players[0]);
 
         expect(players[0].handValue[9]).to.equal(14);
+
+        console.log(players[0].handValue);
+
         done();
+
+
     })
 });
