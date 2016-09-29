@@ -26,4 +26,7 @@ router.route('/games')
 router.route('/games/new')
       .post(gamesController.join);
 
+router.route('/games/:id/test')
+      .post(gamesController.test);
+
 module.exports = router;

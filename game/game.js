@@ -543,4 +543,10 @@ Game.prototype.highCard = function(playerHand){
 
 }
 
+//############### TESTING FUNCTIONS
+
+Game.prototype.testDeck = function() {
+ return this.deck;
+}
+
 module.exports = Game;
