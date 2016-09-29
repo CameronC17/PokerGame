@@ -72,7 +72,7 @@ function performCommand(gameID, req, res){
     }else if(req.body.fold == 'true'){
       tables[gameID[0]].actionFold(gameID[1]);
     }
-  res.json(tables[gameID[0]].getTableCards());
+  res.json({"cards" : tables[gameID[0]].getTableCards(), "chips" : tables[gameID[0]].getTableChips()});
 
   }
 
