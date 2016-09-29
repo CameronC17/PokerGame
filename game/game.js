@@ -183,14 +183,12 @@ Game.prototype.checkWinners = function() {
     	       largest =[];
     	      largest.push(highestIndex[i]);
     	    }
-      } console.log('winner',largest);
+      }
 
+			console.log('winner',largest);
+			return largest[0].player;
     }
   }
-
-
-
-
 
 Game.prototype.checkHand = function(player) {
   var playerHand = player.getHand();
@@ -288,7 +286,7 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
 	}
 
 	//checks table cards
-	for (var i = 0; i < 5; i++) {
+	for (var i = 0; i < this.tableCards.length; i++) {
 		switch (this.tableCards[i].suit) {
 			case "heart":
 				suits[0].push(this.tableCards[i]);

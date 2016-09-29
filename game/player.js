@@ -1,4 +1,4 @@
-function Player(username, id, wallet, hand, handValue){
+function Player(username, id, wallet){
   this.username = username;
   this.id = id;
   this.wallet = wallet;
@@ -14,6 +14,10 @@ Player.prototype.getID = function() {
 
 Player.prototype.addCard = function(card){
   this.hand.push(card);
+}
+
+Player.prototype.setHand = function(cards){
+  this.hand = cards;
 }
 
 Player.prototype.getHand = function(){
