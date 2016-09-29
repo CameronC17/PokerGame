@@ -182,7 +182,7 @@ function checkWinner(req, res) {
     handValues: handValues
   }
 
-  res.json(response).sendStatus(200);
+  res.json(response);
 }
 
 
