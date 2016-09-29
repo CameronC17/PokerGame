@@ -401,16 +401,6 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
     return false;
   }
 
-        if (checkStraight[0] == true && checkStraight[1] == true && checkStraight[2] == true && checkStraight[3] == true && checkStraight[4] == true) {
-            console.log("ROYAL FLUSH: ", cardsToCheck, playerHand);
-            return 14;
-        } else {
-            return false;
-        }
-    } else {
-        return false;
-    }
-
 }
 
 Game.prototype.checkStraightFlush = function(playerHand) {
