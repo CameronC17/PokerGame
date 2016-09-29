@@ -16,14 +16,16 @@ function createSession(req, res) {
             // Sets the session user id to equal the logged in user id.
             req.session.user = user.id;
             console.log("user logged in "+ req.body.username );
-            res.sendStatus(200);
+            res.status(200).send({
+              "user" : user.id,
+              "username" : user.username
+            });
         } else {
             if (err) {
                 console.log(err.message);
             } else {
                 console.log("There's no user with those credentials!");
             }
-
             res.sendStatus(400);
         }
     });

@@ -5,6 +5,7 @@ function Player(username, id, wallet, hand, handValue){
   // this.stake = 0
   this.hand = [];
   this.handValue = [null, null, null, null, null, null, null, null, null, null];
+  this.command = null;
 }
 
 Player.prototype.getID = function() {
@@ -20,7 +21,7 @@ Player.prototype.getHand = function(){
 }
 
 Player.prototype.setHandValue = function(index, highCard){
-  this.handValue[9] = 14;
+  this.handValue[index] = highCard;
 }
 
 module.exports = Player;

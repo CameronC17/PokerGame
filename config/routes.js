@@ -20,10 +20,10 @@ router.route('/users/:id')
       .patch(usersController.update);
 
 // Game routes
-router.route('/games/')
+router.route('/games')
       .post(gamesController.control);
 
 router.route('/games/new')
-      .post(gamesController.create);
+      .post(gamesController.join);
 
 module.exports = router;
