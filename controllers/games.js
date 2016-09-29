@@ -149,7 +149,6 @@ function testGame(req, res) {
   }
 */
 function checkWinner(req, res) {
-  console.log(req.body.playerHands);
   var playerHand0 = req.body.playerHands.player0;
   var playerHand1 = req.body.playerHands.player1;
   var playerHand2 = req.body.playerHands.player2;
@@ -161,13 +160,13 @@ function checkWinner(req, res) {
     players.push(new Player());
   };
 
-  players[0].setHand(playerHand0);
-  players[1].setHand(playerHand1);
-  players[2].setHand(playerHand2);
-  players[3].setHand(playerHand3);
-  players[4].setHand(playerHand4);
-
   var game = new Game(players);
+
+  game.players[0].setHand(playerHand0);
+  game.players[1].setHand(playerHand1);
+  game.players[2].setHand(playerHand2);
+  game.players[3].setHand(playerHand3);
+  game.players[4].setHand(playerHand4);
 
   game.tableCards = req.body.tableCards;
 
@@ -183,7 +182,7 @@ function checkWinner(req, res) {
     handValues: handValues
   }
 
-  res.json(response).sendStatus(200);
+  res.json(response);
 }
 
 
