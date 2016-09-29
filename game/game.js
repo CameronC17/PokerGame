@@ -132,16 +132,45 @@ Game.prototype.checkWinners = function() {
 
 	var handIndexes = [];
 
+
 	// For each player, get their hand value index.
 	// The player with the highest index wins.
 	// Need to add logic for players with the same index.
 	for (var i = 0; i < players.length; i++) {
 		for (var j = 0; j < 10; j++) {
 			if (players[i].handVal[j] != null) {
-				handIndexes.push(j);
+				handIndexes.push({ index : j, highCard : players.handVal[j] });
 			}
 		}
 	}
+
+
+  var largest=[0];
+ //find the largest num;
+ for(var i=0;i<handIndexes.length;i++){
+   var comp=(handIndexes[i].index-largest[0])>0;
+      if(comp){
+	  largest =[];
+	  largest.push(handIndexes[i].index);
+	  }
+ }
+
+ highestIndex = [];
+
+ for(var i=0;i<handIndexes.length;i++){
+    var comp=handIndexes[i]-largest[0]==0;
+	if(comp){
+	highestIndex.push(i);
+	}
+ }
+
+  if (highestIndexes = 1) {
+    return
+
+  }
+
+
+
 }
 
 Game.prototype.checkHand = function(player) {
