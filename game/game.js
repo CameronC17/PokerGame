@@ -141,6 +141,7 @@ Game.prototype.checkWinners = function() {
 			}
 		}
 	}
+
 }
 
 Game.prototype.checkHand = function(player) {
