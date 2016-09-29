@@ -145,8 +145,6 @@ Game.prototype.checkWinners = function() {
 		}
 	}
 
-  console.log('hand indexes',handIndexes);
-
   var largest=[0];
  //find the largest num;
  for(var i=0;i<handIndexes.length;i++){
@@ -157,22 +155,17 @@ Game.prototype.checkWinners = function() {
 	  }
  }
 
- console.log('largest',largest);
-
  var highestIndex = [];
 
  for(var i=0;i<handIndexes.length;i++){
     var comp=handIndexes[i].index-largest[0]==0;
-	if(comp){
-	highestIndex.push(handIndexes[i]);
-	}
+		if(comp){
+			highestIndex.push(handIndexes[i]);
+		}
  }
 
- console.log(highestIndex);
-
   if (highestIndex.length == 1) {
-      console.log('anything');
-      return highestIndex[0];
+      return highestIndex[0].player;
     } else if (highestIndex.length > 1) {
       handIndexes = []
       var largest=[0];
@@ -185,7 +178,8 @@ Game.prototype.checkWinners = function() {
     	    }
       }
 
-			console.log('winner',largest);
+			console.log(largest[0].player);
+
 			return largest[0].player;
     }
   }

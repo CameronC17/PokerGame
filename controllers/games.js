@@ -130,14 +130,16 @@ function testGame(req, res) {
 }
 
 
+// Check winner test.
+// Use this format in your POST requests:
 /*
   {
     playerHands: {
       player0: [{cardObj}],
       player1: [{cardObj}],
-      player2: {cardObj},
-      player3: {cardObj},
-      player4: {cardObj},
+      player2: [{cardObj}],
+      player3: [{cardObj}],
+      player4: [{cardObj}],
     },
     tableCards: [
       {cardObj},
@@ -145,7 +147,6 @@ function testGame(req, res) {
     ]
   }
 */
-
 function checkWinner(req, res) {
   console.log(req.body.playerHands);
   var playerHand0 = req.body.playerHands.player0;
