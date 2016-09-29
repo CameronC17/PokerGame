@@ -70,55 +70,47 @@ Game.prototype.actionFold = function(seatPosition) {
 };
 Game.prototype.actionCheck = function(seatPosition) {
     // console.log(seatPosition + ' check');
-    players[seatPosition].command('check');
-    this.actionTime(seatPosition);
+    if(seatPosition == this.turnCounter){
+      console.log("Player " + seatPosition + " has just checked");
+      this.players[seatPosition].command= 'check';
+      this.turnCounter++;
+      this.actionTime();
+    }
+
 };
 
 
 Game.prototype.actionTime = function(seatNumber) {
-    if (seatNumber == this.turnCounter) {
-        // this is where the actions are going to be performed
-        this.turnCounter++;
-        if (this.turnCounter >= this.players.length) {
-            this.turnCounter = null;
-            this.continueGame(gamePosition);
-        }
-
-    }
+  if(this.turnCounter >= this.players.length) {
+      console.log("Betting has finished, moving on");
+      this.turnCounter = null;
+      this.continueGame(gamePosition);
+  }
 }
 
 Game.prototype.continueGame = function(gamePosition) {
-  console.log("started Game");
+  console.log("Current game position: " + gamePosition);
     switch (gamePosition) {
         case (0):
             this.dealPlayerCards();
             this.turnCounter= 0;
             break;
+
         case (1):
-            // Bet on round 1
-            break;
-        case (2):
             // dealFlop
             this.turnCounter= 0;
             break;
-        case (3):
-            // bet on the flop
-            break;
-        case (4):
+
+        case (2):
             // deal the turn
             this.turnCounter= 0;
             break;
-        case (5):
-            // bet on the turn
-            break;
-        case (6):
+
+        case (3):
             // dealRiver
             this.turnCounter= 0;
             break;
-        case (7):
-            // bet on the river
-            break;
-        case (8):
+        case (4):
             // decide winner
             break;
     }
