@@ -384,11 +384,12 @@ describe('Game', function() {
     });
 
     it('should return the index of the winner', function(done) {
-        var game = new Game();
         var players = []
         for (var i = 0; i < 5; i++){
             players.push(new Player());
         }
+
+        var game = new Game(players);
 
         game.tableCards = [
             { suit: 'spade', value: 2 },

@@ -125,25 +125,25 @@ Game.prototype.getPlayers = function() {
 }
 
 Game.prototype.checkWinners = function() {
-  for (var i = 0; i < players.length; i++) {
+  for (var i = 0; i < this.players.length; i++) {
     //players[i].handValue = this.checkHand(players[i]);
-    this.checkHand(players[i]);
+    this.checkHand(this.players[i]);
   }
 
 	var handIndexes = [];
 
+	console.log(players);
 
 	// For each player, get their hand value index.
 	// The player with the highest index wins.
 	// Need to add logic for players with the same index.
-	for (var i = 0; i < players.length; i++) {
+	for (var i = 0; i < this.players.length; i++) {
 		for (var j = 0; j < 10; j++) {
-			if (players[i].handVal[j] != null) {
-				handIndexes.push({ index : j, highCard : players.handVal[j] });
+			if (this.players[i].handVal[j] != null) {
+				handIndexes.push({ index : j, highCard : this.players.handVal[j] });
 			}
 		}
 	}
-
 
   var largest=[0];
  //find the largest num;
@@ -155,7 +155,7 @@ Game.prototype.checkWinners = function() {
 	  }
  }
 
- highestIndex = [];
+ var highestIndex = [];
 
  for(var i=0;i<handIndexes.length;i++){
     var comp=handIndexes[i]-largest[0]==0;
@@ -165,13 +165,8 @@ Game.prototype.checkWinners = function() {
  }
 
   if (highestIndexes = 1) {
-    return
-
+    return highestIndexes[0];
   }
-
-
-
-
 }
 
 Game.prototype.checkHand = function(player) {
@@ -320,7 +315,6 @@ Game.prototype.checkRoyalFlush = function(playerHand) {
 		}
 
 		if (checkStraight[0] == true && checkStraight[1] == true && checkStraight[2] == true && checkStraight[3] == true && checkStraight[4] == true) {
-			console.log("ROYAL FLUSH: ",cardsToCheck, playerHand);
       return 14;
 		} else {
       return false;
@@ -433,8 +427,6 @@ Game.prototype.checkFlush = function(playerHand) {
 		}
 	}
 
-	console.log("FLUSH: ", suits);
-
 	for (var i = 0; i < 4; i++) {
 		if (suits[i].length >= 5)
 			return suits[i][suits[i].length - 1].value;
@@ -446,7 +438,6 @@ Game.prototype.checkFlush = function(playerHand) {
 Game.prototype.checkMultiple = function(cardsToCheck, num){  //applies for fours, three of a kind and doubles
 
   cardsToCheck.sort(this.sortNumber);
-	console.log(cardsToCheck);
 
 	var counts = {}, i, value;
 	// We did not copy this
