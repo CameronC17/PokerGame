@@ -132,18 +132,20 @@ Game.prototype.checkWinners = function() {
 
 	var handIndexes = [];
 
-	console.log(players);
 
 	// For each player, get their hand value index.
 	// The player with the highest index wins.
 	// Need to add logic for players with the same index.
 	for (var i = 0; i < this.players.length; i++) {
 		for (var j = 0; j < 10; j++) {
-			if (this.players[i].handVal[j] != null) {
-				handIndexes.push({ index : j, highCard : this.players.handVal[j] });
+			if (this.players[i].handValue[j] != null) {
+				handIndexes.push({player : i, index : j, highCard : this.players[i].handValue[j] });
+
 			}
 		}
 	}
+
+  console.log('hand indexes',handIndexes);
 
   var largest=[0];
  //find the largest num;
@@ -155,19 +157,40 @@ Game.prototype.checkWinners = function() {
 	  }
  }
 
+ console.log('largest',largest);
+
  var highestIndex = [];
 
  for(var i=0;i<handIndexes.length;i++){
-    var comp=handIndexes[i]-largest[0]==0;
+    var comp=handIndexes[i].index-largest[0]==0;
 	if(comp){
-	highestIndex.push(i);
+	highestIndex.push(handIndexes[i]);
 	}
  }
 
-  if (highestIndexes = 1) {
-    return highestIndexes[0];
+ console.log(highestIndex);
+
+  if (highestIndex.length == 1) {
+      console.log('anything');
+      return highestIndex[0];
+    } else if (highestIndex.length > 1) {
+      handIndexes = []
+      var largest=[0];
+      //find the largest num;
+     for(var i=0;i<highestIndex.length;i++){
+       var comp=(highestIndex[i].highCard-largest[0])>0;
+          if(comp){
+    	       largest =[];
+    	      largest.push(highestIndex[i]);
+    	    }
+      } console.log('winner',largest);
+
+    }
   }
-}
+
+
+
+
 
 Game.prototype.checkHand = function(player) {
   var playerHand = player.getHand();
@@ -562,6 +585,12 @@ Game.prototype.highCard = function(playerHand){
 
   return highCard.value;
 
+}
+
+//############### TESTING FUNCTIONS
+
+Game.prototype.testDeck = function() {
+ return this.deck;
 }
 
 module.exports = Game;

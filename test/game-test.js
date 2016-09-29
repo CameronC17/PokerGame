@@ -156,7 +156,7 @@ describe('Game', function() {
 
         var straightCheck = game.checkHand(players[0]);
 
-        console.log("STRAIGHT FLUSH: ", players[0].handValue);
+        // console.log("STRAIGHT FLUSH: ", players[0].handValue);
         expect(players[0].handValue[8]).to.equal(7);
 
         done();
@@ -283,7 +283,7 @@ describe('Game', function() {
 
         var suits = game.checkHand(players[0]);
 
-        console.log(players[0].handValue);
+        // console.log(players[0].handValue);
 
         expect(players[0].handValue[5]).to.equal(10);
         done();
@@ -378,7 +378,7 @@ describe('Game', function() {
 
         expect(players[0].handValue[9]).to.equal(14);
 
-        console.log(players[0].handValue);
+        // console.log(players[0].handValue);
 
         done();
     });
@@ -393,19 +393,19 @@ describe('Game', function() {
 
         game.tableCards = [
             { suit: 'spade', value: 2 },
+            { suit: 'heart', value: 9 },
+            { suit: 'heart', value: 10 },
             { suit: 'heart', value: 11 },
-            { suit: 'heart', value: 12 },
-            { suit: 'heart', value: 13 },
-            { suit: 'heart', value: 14 }
+            { suit: 'heart', value: 12 }
         ];
 
         players[0].hand = [
-            { suit: 'heart', value: 10 },
+            { suit: 'heart', value: 13 },
             { suit: 'spade', value: 3 }
         ];
 
         players[1].hand = [
-            { suit: 'club', value: 2 },
+            { suit: 'heart', value: 13 },
             { suit: 'diamond', value: 3 }
         ];
 
