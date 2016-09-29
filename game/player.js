@@ -1,4 +1,5 @@
 function Player(username, id, wallet){
+  this.isAI = false;
   this.username = username;
   this.id = id;
   this.wallet = wallet;

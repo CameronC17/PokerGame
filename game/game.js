@@ -79,9 +79,51 @@ Game.prototype.actionCheck = function(seatPosition) {
       //this.turnCounter++;
       this.turnCounter = 5;
       this.actionTime();
+      this.checkFinished(seatPosition);
     }
 
 };
+
+Game.prototype.checkFinished = function(seatPosition) {
+  var check = true;
+
+  for (var i=0; i < this.players[seatPosition].length; i++){
+    if (this.players[i].isAI != true){
+      if (this.players[i].command != 'check') {
+        check = false;
+        break;
+      }
+    }
+  }
+
+  if (check = true){
+    return computer.think();
+  };
+}
+
+Game.prototype.checkAI = function(seatPosition){
+
+  // var check = true;
+  //
+  // for (var i=0; i < this.players.length; i++){
+  //   if (this.players[seatPosition].command != 'check'){
+  //     check = false;
+  //     break;
+  //   }
+  // }
+  //
+  // if (check = true){
+  //   return computer.think();
+  // };
+
+  if (seatPosition + 1 < players.length) {
+    if (this.players[seatPosition + 1].isAI == true) {
+      //do stuff
+      this.checkAI(seatPosition + 1);
+    }
+  }
+
+}
 
 
 
