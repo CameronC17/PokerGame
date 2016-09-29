@@ -381,7 +381,51 @@ describe('Game', function() {
         console.log(players[0].handValue);
 
         done();
+    });
 
+    it('should return the index of the winner', function(done) {
+        var game = new Game();
+        var players = []
+        for (var i = 0; i < 5; i++){
+            players.push(new Player());
+        }
 
+        game.tableCards = [
+            { suit: 'spade', value: 2 },
+            { suit: 'heart', value: 11 },
+            { suit: 'heart', value: 12 },
+            { suit: 'heart', value: 13 },
+            { suit: 'heart', value: 14 }
+        ];
+
+        players[0].hand = [
+            { suit: 'heart', value: 10 },
+            { suit: 'spade', value: 3 }
+        ];
+
+        players[1].hand = [
+            { suit: 'club', value: 2 },
+            { suit: 'diamond', value: 3 }
+        ];
+
+        players[2].hand = [
+            { suit: 'diamond', value: 14 },
+            { suit: 'spade', value: 14 }
+        ];
+
+        players[3].hand = [
+            { suit: 'club', value: 2 },
+            { suit: 'heart', value: 3 }
+        ];
+
+        players[4].hand = [
+            { suit: 'club', value: 2 },
+            { suit: 'club', value: 3 }
+        ];
+
+        var winner = game.checkWinners();
+
+        expect(winner).to.equal(0);
+        done();
     })
 });

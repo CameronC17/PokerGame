@@ -144,6 +144,7 @@ Game.prototype.checkWinners = function() {
 		}
 	}
 
+<<<<<<< HEAD
 
   var largest=[0];
  //find the largest num;
@@ -171,6 +172,8 @@ Game.prototype.checkWinners = function() {
 
 
 
+=======
+>>>>>>> b2d75a11f9a118ad7f1d27ce989f0efe8f357a3e
 }
 
 Game.prototype.checkHand = function(player) {
