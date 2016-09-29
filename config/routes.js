@@ -27,10 +27,7 @@ router.route('/games')
 router.route('/games/new')
       .post(gamesController.join);
 
-<<<<<<< HEAD
 // Test routes
-=======
->>>>>>> allowtest
 router.route('/games/:id/test')
       .post(gamesController.test);
 
