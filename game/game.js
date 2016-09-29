@@ -54,7 +54,7 @@ Game.prototype.checkPlayerOnTable = function(playerID) {
 };
 
 Game.prototype.actionBet = function(seatPosition, betAmount) {
-    // console.log(seatPosition, betAmount);
+    console.log(seatPosition + "bet: " + betAmount);
     if(seatPosition == this.turnCounter){
       this.lastBet = betAmount;
       this.players[seatPosition].command = betAmount;
@@ -149,7 +149,6 @@ Game.prototype.actionTime = function(seatNumber) {
 Game.prototype.resetCommands = function () {
   for( var i = 0; i < this.players.length ; i++){
     if (this.players[i].command != 'fold'){
-      console.log('Resetting commands');
       this.players[i].command = null;
     }
   }
@@ -183,6 +182,7 @@ Game.prototype.continueGame = function() {
             break;
         case (4):
             // decide winner
+            console.log("Player " + this.checkWinners() + " wins!!!!");
             break;
     }
     this.gamePosition++;
@@ -588,9 +588,6 @@ Game.prototype.checkFlush = function(playerHand) {
 	}
   return false;
 
-
-    console.log("FLUSH: ", suits);
-
     for (var i = 0; i < 4; i++) {
         if (suits[i].length >= 5)
             return suits[i][suits[i].length - 1].value;
@@ -608,7 +605,6 @@ Game.prototype.checkMultiple = function(cardsToCheck, num) { //applies for fours
 
 
     cardsToCheck.sort(this.sortNumber);
-    console.log(cardsToCheck);
 
 
 
