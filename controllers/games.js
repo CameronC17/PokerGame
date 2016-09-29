@@ -128,9 +128,65 @@ function testGame(req, res) {
 }
 
 
+/*
+  {
+    playerHands: {
+      player0: [{cardObj}],
+      player1: [{cardObj}],
+      player2: {cardObj},
+      player3: {cardObj},
+      player4: {cardObj},
+    },
+    tableCards: [
+      {cardObj},
+      {cardObj} ...
+    ]
+  }
+*/
+
+function checkWinner(req, res) {
+  console.log(req.body.playerHands);
+  var playerHand0 = req.body.playerHands.player0;
+  var playerHand1 = req.body.playerHands.player1;
+  var playerHand2 = req.body.playerHands.player2;
+  var playerHand3 = req.body.playerHands.player3;
+  var playerHand4 = req.body.playerHands.player4;
+  var players = [];
+
+  for (var i = 0; i < 5; i++){
+    players.push(new Player());
+  };
+
+  players[0].setHand(playerHand0);
+  players[1].setHand(playerHand1);
+  players[2].setHand(playerHand2);
+  players[3].setHand(playerHand3);
+  players[4].setHand(playerHand4);
+
+  var game = new Game(players);
+
+  game.tableCards = req.body.tableCards;
+
+  var winner = game.checkWinners()
+  var handValues = [];
+
+  for(var i = 0; i < players.length; i++) {
+    handValues.push(players[i].handValue);
+  }
+  
+  var response = {
+    winner: winner,
+    handValues: handValues
+  }
+
+  res.json(response).sendStatus(200);
+}
+
+
 
 module.exports = {
     join: joinPool,
     control: controlGame,
-    test: testGame
+    test: testGame,
+    checkWinner: checkWinner
 }

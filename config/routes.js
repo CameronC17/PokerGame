@@ -31,4 +31,7 @@ router.route('/games/new')
 router.route('/games/:id/test')
       .post(gamesController.test);
 
+router.route('/games/test/winner')
+      .post(gamesController.checkWinner);
+
 module.exports = router;
