@@ -3,14 +3,19 @@ var User = require('../models/user');
 
 
 function createUser(req, res) {
-	User.create(req.body, function (err, user) {
-		if (err) {
-			console.log(err.message);
-			res.sendStatus(400);
-		}
-		console.log(req.body);
-		res.sendStatus(201);
-	});
+	if (req.body.username == null || req.body.password == null) {
+		res.sendStatus(400);
+	} else {
+		User.create(req.body, function (err, user) {
+			if (err) {
+				console.log(err.message);
+				res.sendStatus(400);
+			}
+			console.log(req.body);
+			res.sendStatus(201);
+		});
+	}
+
 };
 
 function updateUser(req, res) {
