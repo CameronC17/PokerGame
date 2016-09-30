@@ -23,6 +23,7 @@ function Game(players) {
     this.turnCounter = null;
     this.gamePosition = 0;
     this.continueGame(this.gamePosition);
+    this.lastBet = null;
 }
 
 Game.prototype.startGame = function() {
@@ -50,25 +51,38 @@ Game.prototype.checkPlayerOnTable = function(playerID) {
         }
     }
     return false;
-}
+};
 
 Game.prototype.actionBet = function(seatPosition, betAmount) {
-    // console.log(seatPosition, betAmount);
-    this.players[seatPosition].command = betAmount;
-    this.pot += betAmount;
-    console.log(this.pot);
-    this.actionTime(seatPosition);
+    console.log(seatPosition + "bet: " + betAmount);
+    if(seatPosition == this.turnCounter){
+      this.lastBet = betAmount;
+      this.players[seatPosition].command = betAmount;
+      this.pot += parseInt(betAmount);
+      // this.turnCounter++;
+      this.turnCounter = 5;
+      this.actionTime(seatPosition);
+  };
 };
 
 Game.prototype.actionCall = function(seatPosition) {
-    // console.log(seatPosition + ' call');
-    players[seatPosition].command('call');
-    this.actionTime(seatPosition);
+    console.log(seatPosition + ' call');
+    if(seatPosition == this.turnCounter){
+      this.players[seatPosition].command = this.lastBet;
+      // this.turnCounter++;
+      this.turnCounter = 5;
+      this.actionTime(seatPosition);
+  };
 };
 Game.prototype.actionFold = function(seatPosition) {
-    // console.log(seatPosition + ' fold');
-    players[seatPosition].command('fold');
-    this.actionTime(seatPosition);
+    console.log(seatPosition + ' fold');
+    if(seatPosition == this.turnCounter){
+      this.players[seatPosition].command = 'fold';
+      this.players.hand = null;
+      // this.turnCounter++;
+      this.turnCounter = 5;
+      this.actionTime(seatPosition);
+  };
 };
 Game.prototype.actionCheck = function(seatPosition) {
     // console.log(seatPosition + ' check');
@@ -79,9 +93,53 @@ Game.prototype.actionCheck = function(seatPosition) {
       //this.turnCounter++;
       this.turnCounter = 5;
       this.actionTime();
+      //this.checkFinished(seatPosition);
     }
+  };
+
 
 };
+
+/*Game.prototype.checkFinished = function(seatPosition) {
+  var check = true;
+
+  for (var i=0; i < this.players[seatPosition].length; i++){
+    if (this.players[i].isAI != true){
+      if (this.players[i].command != 'check') {
+        check = false;
+        break;
+      }
+    }
+  }
+
+  if (check = true){
+    return computer.think();
+  };
+}*/
+
+Game.prototype.checkAI = function(seatPosition){
+
+  // var check = true;
+  //
+  // for (var i=0; i < this.players.length; i++){
+  //   if (this.players[seatPosition].command != 'check'){
+  //     check = false;
+  //     break;
+  //   }
+  // }
+  //
+  // if (check = true){
+  //   return computer.think();
+  // };
+
+  if (seatPosition + 1 < players.length) {
+    if (this.players[seatPosition + 1].isAI == true) {
+      //do stuff
+      this.checkAI(seatPosition + 1);
+    }
+  }
+
+}
 
 
 
@@ -91,38 +149,51 @@ Game.prototype.actionTime = function(seatNumber) {
       this.turnCounter = null;
       this.continueGame();
   }
-}
+};
 
+Game.prototype.resetCommands = function () {
+  for( var i = 0; i < this.players.length ; i++){
+    if (this.players[i].command != 'fold'){
+      this.players[i].command = null;
+    }
+  }
+};
 Game.prototype.continueGame = function() {
   console.log("Current game position: " + this.gamePosition);
     switch (this.gamePosition) {
         case (0):
             this.dealPlayerCards();
             this.turnCounter= 0;
+            this.resetCommands();
             break;
 
         case (1):
             // dealFlop
             this.dealTableCards(3);
             this.turnCounter= 0;
+            this.resetCommands();
             break;
 
         case (2):
             this.dealTableCards(1);
             this.turnCounter= 0;
+            this.resetCommands();
             break;
 
         case (3):
             // dealRiver
             this.dealTableCards(1);
             this.turnCounter= 0;
+            this.resetCommands();
             break;
         case (4):
             // decide winner
+            console.log("Player " + this.checkWinners() + " wins!!!!");
             break;
     }
     this.gamePosition++;
-};
+    this.lastBet = null;
+  };
 
 
 Game.prototype.dealPlayerCards = function() {
@@ -158,6 +229,17 @@ Game.prototype.getPlayerCards = function() {
 Game.prototype.getTableCards = function() {
     return this.tableCards;
 }
+
+Game.prototype.getTableChips = function() {
+    var playerBets = [null,null,null,null,null];
+    for (var i = 0; i < this.players.length; i ++){
+      if (typeof(playerBets[i] = this.players[i].commands) == 'number'){
+        playerBets[i] = this.players[i].commands;
+      }
+    }
+    return playerBets;
+}
+
 
 Game.prototype.getPlayers = function() {
     return this.players;
@@ -523,9 +605,6 @@ Game.prototype.checkFlush = function(playerHand) {
 	}
   return false;
 
-
-    console.log("FLUSH: ", suits);
-
     for (var i = 0; i < 4; i++) {
         if (suits[i].length >= 5)
             return suits[i][suits[i].length - 1].value;
@@ -543,7 +622,6 @@ Game.prototype.checkMultiple = function(cardsToCheck, num) { //applies for fours
 
 
     cardsToCheck.sort(this.sortNumber);
-    console.log(cardsToCheck);
 
 
 

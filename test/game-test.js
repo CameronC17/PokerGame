@@ -8,6 +8,7 @@ var expect = chai.expect;
 var Game = require('../game/game.js');
 var Deck = require('../game/deck.js');
 var Player = require('../game/player.js');
+var Computer = require('../game/computer.js');
 
 describe('Deck', function() {
     it('should return a full deck of 52 cards', function(done) {
@@ -432,4 +433,40 @@ describe('Game', function() {
         expect(winner).to.equal(0);
         done();
     })
+
+});
+
+describe('Computer', function() {
+
+  it('should return a random name', function(done) {
+
+    // var game = new Game(players);
+
+    var computer = new Computer();
+    var name = computer.name;
+    expect(name).to.not.equal('');
+    console.log(name);
+    done();
+  })
+
+
+  // it ('should make the computer check during a game', function(done){
+  //
+  //   var players = []
+  //   for (var i = 0; i < 3; i++){
+  //     players.push(new Player());
+  //   }
+  //   for (var i =0; i < 2; i++){
+  //     players.push(new computer());
+  //   }
+  //
+  //
+  //
+  //
+  //
+  //
+  // })
+
+
+
 });
