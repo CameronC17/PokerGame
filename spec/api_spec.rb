@@ -2,7 +2,7 @@ describe "Poker game api" do
 
   before:all do
     @driver = Selenium::WebDriver.for :chrome
-    @fe_url = "http://localhost:3002"
+    @fe_url = "http://localhost:3001"
     @url = "http://localhost:3000/api/users"
     @cards_url = "http://localhost:3000/api/games/test/winner"
     @deck_url = "http://localhost:3000/api/games"
