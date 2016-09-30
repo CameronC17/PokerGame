@@ -58,6 +58,7 @@ Game.prototype.actionBet = function(seatPosition, betAmount) {
     if(seatPosition == this.turnCounter){
       this.lastBet = betAmount;
       this.players[seatPosition].command = betAmount;
+      console.log(this.players[seatPosition].command);
       this.pot += parseInt(betAmount);
       // this.turnCounter++;
       this.turnCounter = 5;
@@ -189,6 +190,7 @@ Game.prototype.getTableCards = function() {
 Game.prototype.getTableChips = function() {
     var playerBets = [null,null,null,null,null];
     for (var i = 0; i < this.players.length; i ++){
+      console.log(this.players[i].command)
       if (typeof(playerBets[i] = this.players[i].commands) == 'number'){
         playerBets[i] = this.players[i].commands;
       }
