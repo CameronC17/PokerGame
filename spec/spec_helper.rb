@@ -29,6 +29,7 @@ end
 def run_game
     login
     @driver.find_element(id: "gamepage").click
+    @driver.switch_to.alert.accept
     @driver.find_element(id: "single").click
     @driver.find_element(id: "start").click
 end

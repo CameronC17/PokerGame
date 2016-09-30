@@ -2,36 +2,41 @@ describe "Poker game api" do
 
   before:all do
     @driver = Selenium::WebDriver.for :chrome
-    @fe_url = "http://localhost:3002"
-    @url = "http://localhost:3000/api/users"
-    @cards_url = "http://localhost:3000/api/games/test/winner"
-    @deck_url = "http://localhost:3000/api/games"
+    @fe_base_ip = ENV['POKER_GAME_FRONTEND_BASE_IP'] || "localhost:3001"
+    @api_base_ip = ENV['POKER_GAME_API_BASE_IP'] || "localhost:3000"
+
+    @fe_url = "http://#{@fe_base_ip}"
+    @api_url = "http://#{@api_base_ip}/api"
+
+    @url = "#{@api_url}/users"
+    @cards_url = "#{@api_url}/games/test/winner"
+    @deck_url = "#{@api_url}/games"
     @username = "test" + rand(1000).to_s
     @password = "password"
+    @id = "57ea4d5851eecd3b9b42e8e9"
   end
 
   it 'should allow a user to be created' do
     create_user = HTTParty.post(@url, body:{ username: "#{@username}", password: "#{@password}", wallet: "#{@wallet}"})
-    create_user.code
     expect(create_user.code).to eq 201
-    create_user.message
     expect(create_user.message).to eq "Created"
   end
 
   it 'should allow a user to log in' do
     login = HTTParty.post("#{@url}/login", body:{ username: "#{@username}", password: "#{@password}"})
-    login.code
     expect(login.code).to eq 200
-    login.message
     expect(login.message).to eq "OK"
   end
-  # midway through this test - need to edit password, then edit username and password back to original
   it 'should allow a user to edit their username/password' do
-    edit_username = HTTParty.patch("#{@url}/57ea4d5851eecd3b9b42e8e9", body:{ username: "alex_test"})
-    edit_username.code
+    edit_username = HTTParty.patch("#{@url}/#{@id}", body:{ username: "alex_test"})
     expect(edit_username.code).to eq 200
-    edit_username.message
     expect(edit_username.message).to eq "OK"
+    edit_password = HTTParty.patch("#{@url}/#{@id}", body:{ passowrd: "password2000"})
+    expect(edit_password.code).to eq 200
+    expect(edit_password.message).to eq "OK"
+    edit_both = HTTParty.patch("#{@url}/#{@id}", body:{ username: "testz", passowrd: "password"})
+    expect(edit_both.code).to eq 200
+    expect(edit_both.message).to eq "OK"
   end
 
   it 'should check that the deck that has been dealt is shuffled' do
