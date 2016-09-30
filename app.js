@@ -15,8 +15,12 @@ app.use(bodyParser.urlencoded({ extended: false}));
 
 app.use(bodyParser.json());
 
+<<<<<<< HEAD
 // mongoose.connect('mongodb://localhost/poker');
 mongoose.connect(process.env.DB_URL || 'mongodb://192.10.10.200:27017/poker');
+//mongoose.connect('mongodb://localhost/poker');
+//mongoose.connect('mongodb://192.10.10.200:27017/poker');
+mongoose.connect(process.env.DB_URL || 'mongodb://192.10.10.200:27017/poker'); //testing prod
 
 var User = require('./models/user');
 
