@@ -2,9 +2,11 @@ describe "Poker game api" do
 
   before:all do
     @driver = Selenium::WebDriver.for :chrome
+    @fe_url = "http://localhost:3002"
     @url = "http://localhost:3000/api/users"
     @cards_url = "http://localhost:3000/api/games/test/winner"
-    @username = "test1"
+    @deck_url = "http://localhost:3000/api/games"
+    @username = "test" + rand(1000).to_s
     @password = "password"
   end
 
@@ -17,37 +19,82 @@ describe "Poker game api" do
   end
 
   it 'should allow a user to log in' do
-    login = HTTParty.post("http://localhost:3000/api/users/login", body:{ username: "#{@username}", password: "#{@password}"})
+    login = HTTParty.post("#{@url}/login", body:{ username: "#{@username}", password: "#{@password}"})
     login.code
     expect(login.code).to eq 200
     login.message
     expect(login.message).to eq "OK"
   end
 
+  it 'should check that the deck that has been dealt is shuffled' do
+    @driver.get(@fe_url)
+    run_game
+    deck = HTTParty.post("#{@deck_url}/0/test", body:{ test: "deck" })
+    @driver.get(@fe_url)
+    run_game
+    deck2 = HTTParty.post("#{@deck_url}/1/test", body:{ test: "deck" })
+    expect(deck).to_not eq deck2
+    @driver.quit
+  end
+
   it 'should return a royal flush and player 0 as the winner' do
-    cards = HTTParty.post("@cards_url",
-      body:{
-        "playerHands": {
-          "player0": [ {"suit": "heart", "value": 10}, {"suit": "heart", "value": 11} ],
-          "player1": [ {"suit": "diamond", "value": 2}, {"suit": "diamond", "value": 3} ],
-          "player2": [ {"suit": "diamond", "value": 4}, {"suit": "diamond", "value": 5} ],
-          "player3": [ {"suit": "diamond", "value": 6}, {"suit": "diamond", "value": 7} ],
-          "player4": [ {"suit": "diamond", "value": 8}, {"suit": "diamond", "value": 9} ]
-        },
-        "tableCards": [
-            {"suit": "heart", "value": 12},
-            {"suit": "heart", "value": 13},
-            {"suit": "heart", "value": 14},
-            {"suit": "spade", "value": 7},
-            {"suit": "club", "value": 9}
-        ]
-      }
-    )
-    expect(response[8]).to_not eq nil 
-    # use a HTTParty.get(url/checkwinner)
-    # pass in 7 cards
-    # check 7 cards are a royal flush - pass
-    # check 7 cards ARE NOT a royal flush
+    royalflush
+    expect(@cards["winner"]).to eq 0
+    expect(@cards["handValues"][0][9]).to_not eq nil
+  end
+
+  it 'should return a straight flush and player 0 as the winner' do
+    straightflush
+    expect(@cards["winner"]).to eq 0
+    expect(@cards["handValues"][0][8]).to_not eq nil
+  end
+
+  it 'should return a four of a kind and player 0 as the winner' do
+    fourkind
+    expect(@cards["winner"]).to eq 0
+    expect(@cards["handValues"][0][7]).to_not eq nil
+  end
+
+  it 'should return a full house and player 0 as the winner' do
+    fullhouse
+    expect(@cards["winner"]).to eq 0
+    expect(@cards["handValues"][0][6]).to_not eq nil
+  end
+
+  it 'should return a flush and player 0 as the winner' do
+    flush
+    expect(@cards["winner"]).to eq 0
+    expect(@cards["handValues"][0][5]).to_not eq nil
+  end
+
+  it 'should return a straight and player 0 as the winner' do
+    straight
+    expect(@cards["winner"]).to eq 0
+    expect(@cards["handValues"][0][4]).to_not eq nil
+  end
+
+  it 'should return a three of a kind and player 0 as the winner' do
+    threekind
+    expect(@cards["winner"]).to eq 0
+    expect(@cards["handValues"][0][3]).to_not eq nil
+  end
+
+  it 'should return a two pair and player 0 as the winner' do
+    twopair
+    expect(@cards["winner"]).to eq 0
+    expect(@cards["handValues"][0][2]).to_not eq nil
+  end
+
+  it 'should return a pair and player 0 as the winner' do
+    pair
+    expect(@cards["winner"]).to eq 0
+    expect(@cards["handValues"][0][1]).to_not eq nil
+  end
+
+  it 'should return a high card and player 0 as the winner' do
+    highcard
+    expect(@cards["winner"]).to eq 0
+    expect(@cards["handValues"][0][0]).to_not eq nil
   end
 
 end

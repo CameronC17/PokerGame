@@ -72,7 +72,7 @@ function performCommand(gameID, req, res){
     }else if(req.body.fold == 'true'){
       tables[gameID[0]].actionFold(gameID[1]);
     }
-  res.json(tables[gameID[0]].getTableCards());
+  res.json({"cards" : tables[gameID[0]].getTableCards(), "chips" : tables[gameID[0]].getTableChips()});
 
   }
 
@@ -155,6 +155,7 @@ function testGame(req, res) {
   }
 */
 function checkWinner(req, res) {
+  console.log(req.body);
   var playerHand0 = req.body.playerHands.player0;
   var playerHand1 = req.body.playerHands.player1;
   var playerHand2 = req.body.playerHands.player2;
