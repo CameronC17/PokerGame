@@ -82,15 +82,14 @@ Game.prototype.actionFold = function(seatPosition) {
       this.actionTime(this.turnCounter);
 };
 Game.prototype.actionCheck = function(seatPosition) {
-    // console.log(seatPosition + ' check');
-
+    // console.log(seatPosition + ' check')
       console.log("Player " + this.turnCounter + " has just checked");
       this.players[this.turnCounter].command= 'check';
       this.turnCounter++;
       // this.turnCounter = 5;
       this.actionTime(this.turnCounter);
 
-};
+
 
 /*Game.prototype.checkFinished = function(seatPosition) {
   var check = true;
@@ -150,6 +149,7 @@ Game.prototype.resetCommands = function () {
     }
   }
 };
+
 Game.prototype.continueGame = function() {
   console.log("Current game position: " + this.gamePosition);
     switch (this.gamePosition) {
@@ -185,8 +185,7 @@ Game.prototype.continueGame = function() {
     }
     this.gamePosition++;
     this.lastBet = null;
-  };
-
+};
 
 Game.prototype.dealPlayerCards = function() {
     for (var i = 0; i < this.players.length; i++) {

@@ -155,6 +155,7 @@ function testGame(req, res) {
   }
 */
 function checkWinner(req, res) {
+  console.log(req.body);
   var playerHand0 = req.body.playerHands.player0;
   var playerHand1 = req.body.playerHands.player1;
   var playerHand2 = req.body.playerHands.player2;
