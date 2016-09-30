@@ -24,6 +24,7 @@ function Game(players) {
     this.gamePosition = 0;
     this.continueGame(this.gamePosition);
     this.lastBet = null;
+    this.winner = null;
 }
 
 Game.prototype.startGame = function() {
@@ -181,7 +182,9 @@ Game.prototype.continueGame = function() {
             break;
         case (4):
             // decide winner
-            console.log("Player " + this.checkWinners() + " wins!!!!");
+            var winner = this.checkWinners();
+            console.log("Player " + (winner + 1) + " wins!!!!");
+            this.winner = winner + 1;
             break;
     }
     this.gamePosition++;
@@ -225,7 +228,6 @@ Game.prototype.getTableCards = function() {
 Game.prototype.getTableChips = function() {
     var playerBets = [null,null,null,null,null];
     for (var i = 0; i < this.players.length; i ++){
-      console.log(this.players[i].command)
       if (typeof(playerBets[i] = this.players[i].commands) == 'number'){
         playerBets[i] = this.players[i].commands;
       }
