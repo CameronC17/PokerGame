@@ -98,7 +98,6 @@ Game.prototype.actionCheck = function(seatPosition) {
   };
 
 
-};
 
 /*Game.prototype.checkFinished = function(seatPosition) {
   var check = true;
