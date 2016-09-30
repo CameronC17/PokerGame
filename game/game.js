@@ -227,9 +227,10 @@ Game.prototype.getTableCards = function() {
 
 Game.prototype.getTableChips = function() {
     var playerBets = [null,null,null,null,null];
+
     for (var i = 0; i < this.players.length; i ++){
-      if (typeof(playerBets[i] = this.players[i].commands) == 'number'){
-        playerBets[i] = this.players[i].commands;
+      if (typeof(playerBets[i] = this.players[i].command) == 'number'){
+        playerBets[i] = this.players[i].command;
       }
     }
     return playerBets;
