@@ -60,6 +60,9 @@ function findUserInTable(userID){
     return null;
 }
 function performCommand(gameID, req, res){
+  if (tables[gameID[0]].turnCounter == 0) {
+    tables[gameID[0]].resetCommands();
+  }
   if (tables[gameID[0]].players[gameID[1]].command == 'fold'){
     res.sendStatus(400);
   }else{
