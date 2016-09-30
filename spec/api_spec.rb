@@ -25,6 +25,14 @@ describe "Poker game api" do
     login.message
     expect(login.message).to eq "OK"
   end
+  # midway through this test - need to edit password, then edit username and password back to original
+  it 'should allow a user to edit their username/password' do
+    edit_username = HTTParty.patch("#{@url}/57ea4d5851eecd3b9b42e8e9", body:{ username: "alex_test"})
+    edit_username.code
+    expect(edit_username.code).to eq 200
+    edit_username.message
+    expect(edit_username.message).to eq "OK"
+  end
 
   it 'should check that the deck that has been dealt is shuffled' do
     @driver.get(@fe_url)

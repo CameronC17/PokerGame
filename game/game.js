@@ -95,8 +95,6 @@ Game.prototype.actionCheck = function(seatPosition) {
       this.actionTime();
       //this.checkFinished(seatPosition);
     }
-  };
-
 
 
 /*Game.prototype.checkFinished = function(seatPosition) {
