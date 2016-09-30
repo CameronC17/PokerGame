@@ -158,27 +158,27 @@ Game.prototype.continueGame = function() {
         case (0):
             this.dealPlayerCards();
             this.turnCounter= 0;
-            this.resetCommands();
+            //this.resetCommands();
             break;
 
         case (1):
             // dealFlop
             this.dealTableCards(3);
             this.turnCounter= 0;
-            this.resetCommands();
+            //this.resetCommands();
             break;
 
         case (2):
             this.dealTableCards(1);
             this.turnCounter= 0;
-            this.resetCommands();
+            //this.resetCommands();
             break;
 
         case (3):
             // dealRiver
             this.dealTableCards(1);
             this.turnCounter= 0;
-            this.resetCommands();
+            //this.resetCommands();
             break;
         case (4):
             // decide winner
