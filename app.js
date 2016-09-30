@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false}));
 
 app.use(bodyParser.json());
 
-//mongoose.connect('mongodb://localhost/poker');
+// mongoose.connect('mongodb://localhost/poker');
 mongoose.connect(process.env.DB_URL || 'mongodb://192.10.10.200:27017/poker');
 
 var User = require('./models/user');
