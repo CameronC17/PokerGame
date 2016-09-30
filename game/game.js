@@ -154,6 +154,7 @@ Game.prototype.resetCommands = function () {
     }
   }
 };
+
 Game.prototype.continueGame = function() {
   console.log("Current game position: " + this.gamePosition);
     switch (this.gamePosition) {
@@ -187,8 +188,7 @@ Game.prototype.continueGame = function() {
     }
     this.gamePosition++;
     this.lastBet = null;
-  };
-
+};
 
 Game.prototype.dealPlayerCards = function() {
     for (var i = 0; i < this.players.length; i++) {
