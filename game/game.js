@@ -55,46 +55,37 @@ Game.prototype.checkPlayerOnTable = function(playerID) {
 
 Game.prototype.actionBet = function(seatPosition, betAmount) {
     // console.log(seatPosition, betAmount);
-    if(seatPosition == this.turnCounter){
+    console.log("Player " + this.turnCounter + " has just bet " + betAmount);
       this.lastBet = betAmount;
-      this.players[seatPosition].command = betAmount;
-      console.log(this.players[seatPosition].command);
+      this.players[this.turnCounter].command = betAmount;
       this.pot += parseInt(betAmount);
-      // this.turnCounter++;
-      this.turnCounter = 5;
-      this.actionTime(seatPosition);
-  };
+      this.turnCounter++;
+      // this.turnCounter = 5;
+      this.actionTime(this.turnCounter);
 };
 
 Game.prototype.actionCall = function(seatPosition) {
-    console.log(seatPosition + ' call');
-    if(seatPosition == this.turnCounter){
-      this.players[seatPosition].command = this.lastBet;
-      // this.turnCounter++;
-      this.turnCounter = 5;
-      this.actionTime(seatPosition);
-  };
+    console.log("Player " + this.turnCounter + " has just called");
+      this.players[this.turnCounter].command = this.lastBet;
+      this.turnCounter++;
+      // this.turnCounter = 5;
+      this.actionTime(this.turnCounter);
 };
 Game.prototype.actionFold = function(seatPosition) {
-    console.log(seatPosition + ' fold');
-    if(seatPosition == this.turnCounter){
-      this.players[seatPosition].command = 'fold';
+    console.log("Player " + this.turnCounter + " has just folded");
+      this.players[this.turnCounter].command = 'fold';
       this.players.hand = null;
-      // this.turnCounter++;
-      this.turnCounter = 5;
-      this.actionTime(seatPosition);
-  };
+      this.turnCounter++;
+      // this.turnCounter = 5;
+      this.actionTime(this.turnCounter);
 };
 Game.prototype.actionCheck = function(seatPosition) {
     // console.log(seatPosition + ' check');
-    if(seatPosition == this.turnCounter){
-      console.log("Player " + seatPosition + " has just checked");
-      console.log("Now lets fake 4 more checks");
-      this.players[seatPosition].command= 'check';
-      // this.turnCounter++;
-      this.turnCounter = 5;
-      this.actionTime(seatPosition);
-    };
+      console.log("Player " + this.turnCounter + " has just checked");
+      this.players[this.turnCounter].command= 'check';
+      this.turnCounter++;
+      // this.turnCounter = 5;
+      this.actionTime(this.turnCounter);
 
 };
 
