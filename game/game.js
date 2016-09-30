@@ -88,6 +88,7 @@ Game.prototype.actionCheck = function(seatPosition) {
       this.turnCounter++;
       // this.turnCounter = 5;
       this.actionTime(this.turnCounter);
+};
 
 
 
