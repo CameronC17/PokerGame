@@ -28,6 +28,8 @@ When sending a post request, send the following data in the body:
 And replace command with what you want to check.
 Currently, there's only one command... but if you want more, just holla
 
+Dave is angry
+
 | COMMAND       | What is does    |
 | ------------- |:-------:|
 | Deck      | Returns the current deck in the game  |
